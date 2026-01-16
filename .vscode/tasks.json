@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build LaTeX with Bibliography",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-c",
+				"cd Chuong && pdflatex -synctex=1 -interaction=nonstopmode -file-line-error 2_Phuong_phap.tex && cd .. && bibtex DoAn.aux && pdflatex -synctex=1 -interaction=nonstopmode -file-line-error DoAn.tex && pdflatex -synctex=1 -interaction=nonstopmode -file-line-error DoAn.tex"
+			],
+			"group": "build"
+		}
+	]
+}

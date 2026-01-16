@@ -1,0 +1,39 @@
+\babel@toc {vietnamese}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Sơ đồ toàn bộ chức năng Sinh viên của trang web}}{12}{figure.caption.8}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Thông tin điểm cá nhân sau khi đăng nhập}}{26}{figure.caption.9}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Giao diện sau khi đăng xuất}}{26}{figure.caption.10}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Sau khi nhấn nút "back", ứng dụng vẫn trả về thông tin điểm cá nhân}}{27}{figure.caption.11}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Cho phép đăng nhập với mật khẩu yếu}}{28}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Cho phép đặt lại mật khẩu mới trùng với mật khẩu cũ}}{29}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Session của tài khoản Quoc.BA}}{31}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Session của tài khoản Anh.NT}}{31}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Linkedloginid của tải khoản Anh.NT}}{32}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Sử dụng tài khoản Quoc.BA gỡ tài khoản liên kết của tài khoản Anh.NT}}{32}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Liên kết của tài khoản Anh.NT đã bị xóa}}{33}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Cookie của người dùng không có cờ HttpOnly: true}}{34}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Cookie của người dùng không có cờ HttpOnly: true}}{35}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Tạo sự kiện mới}}{35}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Chọn tùy chọn chèn Audio/Video}}{36}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Chèn payload XSS trong trường Label}}{36}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Khi người dùng load phải trang, cookie người dùng sẽ tự động được gửi ra ngoài vào webhook}}{37}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Cookie của người dùng không có cờ HttpOnly}}{37}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Lấy cookie thành công trên webhook}}{38}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Truy cập vào chức năng Dashboard trên giao diện}}{39}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Request gửi từ chức năng Dashboard}}{40}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Chèn dấu chấm phẩy vào tham số sort}}{40}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Chèn ký tự comment vào tham số sort}}{41}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Chèn payload time-based vào tham số sort}}{41}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Chèn payload xác định độ dài database vào tham số sort}}{42}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.25}{\ignorespaces Ứng dụng trả về phản hồi bình thường nếu tên bảng đúng}}{42}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.26}{\ignorespaces Ứng dụng trả về phản hồi lỗi nếu tên bảng sai}}{43}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.27}{\ignorespaces Liệt kê thành công các bảng trong cơ sở dữ liệu}}{43}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.28}{\ignorespaces TLS 1.2 hỗ trợ các thuật toán mã hóa yếu}}{45}{figure.caption.36}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsfinish 
+\contentsfinish 

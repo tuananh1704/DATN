@@ -1,0 +1,508 @@
+\documentclass[../DoAn.tex]{subfiles}
+\begin{document}
+
+\section{Tổng quan }
+
+\section{Lỗ hổng lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất}
+\subsection{Mức độ: Trung bình}
+
+\subsection{Điểm CVSS: 3.2 (CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:H/A:N)}
+
+\subsection{Mô tả:}
+Sau khi người dùng thực hiện đăng xuất khỏi ứng dụng web, khi sử dụng chức năng “Back” 
+(quay lại) của trình duyệt, các trang đã truy cập trước đó vẫn được hiển thị đầy đủ, bao 
+gồm cả các trang chứa thông tin nhạy cảm như tin nhắn hoặc điểm số, mặc dù người dùng hiện 
+tại đã không còn đăng nhập.
+
+Trong khi đó, khi người dùng thực hiện các thao tác tương tác khác trên giao diện, 
+hệ thống lại điều hướng đúng về trang đăng nhập do yêu cầu xác thực. Hiện tượng này 
+cho thấy ứng dụng chỉ kiểm tra trạng thái xác thực khi có yêu cầu tải lại trang hoặc 
+phát sinh các yêu cầu AJAX mới, nhưng chưa kiểm soát hiệu quả việc hiển thị nội dung 
+thông qua lịch sử trình duyệt và cơ chế lưu trữ tạm (cache) phía client.
+
+\subsection{Tác động:}
+
+Lỗ hổng này có thể bị kẻ tấn công lợi dụng để truy cập và xem lại các thông tin nhạy 
+cảm của người dùng trước đó, bao gồm thông tin cá nhân, kết quả học tập hoặc các dữ 
+liệu riêng tư khác, mà không cần thực hiện xác thực lại, đặc biệt trong trường hợp 
+thiết bị được sử dụng chung hoặc bị truy cập trái phép.
+
+\subsection{Tái hiện:}
+
+Đăng nhập tài khoản sau đó xem điểm cá nhân
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image1.png}
+\caption{Thông tin điểm cá nhân sau khi đăng nhập}
+\label{fig:image2}
+\end{figure}
+
+Thực hiện đăng xuất khỏi hệ thống
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image2.png}
+\caption{Giao diện sau khi đăng xuất}
+\label{fig:image2}
+\end{figure}
+
+Nhấn nút “back trên trình duyệt”, quan sát thấy vẫn trả về thông tin điểm cá nhân
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image1.png}
+\caption{Sau khi nhấn nút "back", ứng dụng vẫn trả về thông tin điểm cá nhân}
+\label{fig:image3}
+\end{figure}
+
+\subsection{Biện pháp khắc phục:}
+
+Ứng dụng cần được cấu hình để không lưu trữ bộ nhớ đệm đối với các trang chứa thông tin nhạy cảm bằng cách thiết lập các tiêu đề HTTP phù hợp trong phản hồi, chẳng hạn như Cache-Control: no-cache, no-store, must-revalidate, nhằm ngăn chặn việc hiển thị lại nội dung sau khi người dùng đã đăng xuất.
+
+Bên cạnh đó, toàn bộ ứng dụng cần được triển khai trên giao thức HTTPS nhằm đảm bảo an toàn cho quá trình truyền dữ liệu, đồng thời hỗ trợ hiệu quả các cơ chế kiểm soát bộ nhớ đệm và các tiêu đề bảo mật liên quan.
+
+Ngoài ra, phiên làm việc của người dùng cần được vô hiệu hóa đúng cách tại phía máy chủ khi thực hiện đăng xuất, đồng thời đảm bảo tất cả các yêu cầu truy cập sau khi đăng xuất đều được chuyển hướng về trang đăng nhập để yêu cầu xác thực lại.
+
+\subsection{Tham chiếu:}
+
+\section{Chính sách mật khẩu yếu}
+
+\subsection{Mức độ: Thấp}
+
+\subsection{Điểm CVSS: 3.10 (CVSS:3.1/AV:N/AC:H/PR:H/UI:R/S:U/C:L/I:L/A:N)}
+
+\subsection{Mô tả:}
+Trong chức năng đăng nhập, ứng dụng chỉ áp dụng yêu cầu tối thiểu về độ dài mật khẩu là 8 ký tự, nhưng chưa có các ràng buộc về độ phức tạp như việc bắt buộc sử dụng chữ cái in hoa, chữ cái thường, chữ số hoặc ký tự đặc biệt. Bên cạnh đó, trong chức năng thay đổi mật khẩu, hệ thống vẫn cho phép người dùng thiết lập mật khẩu mới trùng với mật khẩu cũ, dẫn đến việc không đảm bảo cải thiện mức độ an toàn của thông tin xác thực.
+
+\subsection{Tác động:}
+Việc áp dụng chính sách mật khẩu chưa đủ mạnh làm gia tăng khả năng mật khẩu của người dùng bị dò đoán hoặc khai thác thành công, đặc biệt trong các kịch bản tấn công như brute-force hoặc credential stuffing. Điều này làm tăng nguy cơ tài khoản người dùng bị chiếm đoạt, dẫn đến khả năng rò rỉ dữ liệu, truy cập trái phép vào hệ thống và phát sinh các rủi ro bảo mật nghiêm trọng khác.
+
+\subsection{Tái hiện:}
+
+Ứng dụng cho phép người dùng đăng nhập thành công với các mật khẩu có độ phức tạp thấp, chẳng hạn như mật khẩu dạng chuỗi số đơn giản (ví dụ như 12345678), cho thấy chính sách mật khẩu hiện tại chưa được thiết lập và thực thi chặt chẽ.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image4.png}
+\caption{Cho phép đăng nhập với mật khẩu yếu}
+\label{fig:image4}
+\end{figure}
+
+Chức năng thay đổi mật khẩu cho phép người dùng thiết lập mật khẩu mới trùng với mật khẩu đã sử dụng trước đó, cho thấy cơ chế quản lý lịch sử mật khẩu chưa được áp dụng hoặc chưa được kiểm soát hiệu quả.
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image5.png}
+\caption{Cho phép đặt lại mật khẩu mới trùng với mật khẩu cũ}
+\label{fig:image5}
+\end{figure}
+
+\subsection{Vị trí:}
+
+\subsection{Phương án khắc phục:}
+
+Ứng dụng cần áp dụng chính sách mật khẩu mạnh và nhất quán, bao gồm các yêu cầu về độ phức tạp, thời hạn sử dụng và khả năng tái sử dụng mật khẩu. Cụ thể, hệ thống nên quy định rõ độ dài tối thiểu và tối đa của mật khẩu nhằm đảm bảo mức độ an toàn cần thiết. Đồng thời, cần thiết lập cơ chế kiểm soát lịch sử mật khẩu để hạn chế việc sử dụng lại các mật khẩu đã từng được dùng trước đó, bao gồm việc xác định số lần đổi mật khẩu tối thiểu hoặc khoảng thời gian cần thiết trước khi cho phép tái sử dụng một mật khẩu cũ.
+
+Bên cạnh đó, ứng dụng cần ngăn chặn việc sử dụng các mật khẩu phổ biến hoặc dễ suy đoán bằng cách kiểm tra và loại bỏ các mật khẩu có chứa các thông tin liên quan trực tiếp đến người dùng hoặc hệ thống, chẳng hạn như tên ứng dụng, tên đơn vị, tên miền hoặc tên người dùng. Việc kiểm tra này có thể được thực hiện thông qua cơ chế chuẩn hóa mật khẩu về dạng chữ thường và so sánh với danh sách các mật khẩu phổ biến trước khi chấp nhận sử dụng.
+
+Ngoài ra, chính sách mật khẩu cần được áp dụng đồng nhất trên toàn bộ các chức năng liên quan đến xác thực, bao gồm tạo tài khoản, thay đổi mật khẩu và khôi phục mật khẩu, nhằm đảm bảo tính nhất quán và giảm thiểu nguy cơ phát sinh các điểm yếu bảo mật trong hệ thống.
+
+\subsection{Tham chiếu:} WSTG-ATHN-07: Testing for Weak Authentication Methods
+
+\section{Lỗ hổng Insecure Direct Object References (IDOR)}
+
+\subsection{Mức độ: Cao}
+
+\subsection{Điểm CVSS: 7.1 (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:N)}
+
+
+\subsection{Mô tả:}
+
+Chức năng Linked Logins tồn tại lỗ hổng Insecure Direct Object Reference (IDOR), cho phép người dùng thực hiện thao tác xóa liên kết tài khoản thông qua việc cung cấp trực tiếp giá trị linkedLoginId mà không có cơ chế xác thực hoặc kiểm tra quyền sở hữu tương ứng.
+
+Cụ thể, mỗi tài khoản trong hệ thống được gán một giá trị linkedLoginId duy nhất và API dùng để xóa liên kết tài khoản chỉ dựa trên tham số này để xác định đối tượng cần xử lý. Tuy nhiên, hệ thống không thực hiện kiểm tra để xác minh rằng linkedLoginId được gửi trong yêu cầu thuộc quyền sở hữu của người dùng đang đăng nhập.
+
+Do đó, người dùng có thể thao túng tham số linkedLoginId trong yêu cầu API nhằm hủy liên kết tài khoản của các người dùng khác trong hệ thống, dẫn đến nguy cơ truy cập trái phép và ảnh hưởng đến tính toàn vẹn của dữ liệu.
+
+\subsection{Tác động:}
+
+Lỗ hổng này chủ yếu ảnh hưởng đến tính sẵn sàng của hệ thống, do cho phép kẻ tấn công hủy liên kết tài khoản của người dùng khác, dẫn đến việc gián đoạn khả năng đăng nhập và truy cập dịch vụ. Ngoài ra, việc thay đổi trái phép trạng thái liên kết tài khoản cũng có thể gây ảnh hưởng gián tiếp đến tính toàn vẹn của dữ liệu người dùng.
+
+\subsection{Tái hiện:}
+
+POC: Dùng tài khoản Quoc.BA gỡ liên kết tài khoản của Anh.NT
+
+Tài khoản Quoc.BA có Session là kfns6djglskf8de2qi9sptptc5
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image6.png}
+\caption{Session của tài khoản Quoc.BA}
+\label{fig:image6}
+\end{figure}
+
+Tài khoản Anh.NT có Session là dm13idcbosk7inlnkutgimfmv6
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image7.png}
+\caption{Session của tài khoản Anh.NT}
+\label{fig:image7}
+\end{figure}
+
+Tài khoản Anh.NT có Linkedloginid=28004
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image8.png}
+\caption{Linkedloginid của tải khoản Anh.NT}
+\label{fig:image8}
+\end{figure}
+
+Sử dụng tài khoản Quoc.BA gỡ tài khoản liên kết của tài khoản Anh.NT bằng cách gửi yêu cầu xóa liên kết có kèm id trong tham số
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image9.png}
+\caption{Sử dụng tài khoản Quoc.BA gỡ tài khoản liên kết của tài khoản Anh.NT}
+\label{fig:image9}
+\end{figure}
+
+Kiểm tra bên tài khoản Anh.NT thì liên kết đã bị xóa
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image10.png}
+\caption{Liên kết của tài khoản Anh.NT đã bị xóa}
+\label{fig:image10}
+\end{figure}
+
+\subsection{Vị trí:}
+
+\subsection{Phương án khắc phục:}
+
+Hệ thống cần thực hiện xác thực quyền sở hữu đối tượng trước khi cho phép thao tác. Cụ thể, khi xử lý yêu cầu xóa liên kết tài khoản, máy chủ phải kiểm tra và đảm bảo rằng giá trị linkedLoginId được gửi trong yêu cầu thực sự thuộc quyền sở hữu của người dùng đang đăng nhập.
+
+Bên cạnh đó, hệ thống nên sử dụng các định danh nội bộ khó đoán, chẳng hạn như UUID hoặc các giá trị được băm, thay vì sử dụng các định danh dạng tăng dần. Việc này giúp giảm khả năng suy đoán hoặc liệt kê các định danh hợp lệ, từ đó hạn chế nguy cơ khai thác lỗ hổng IDOR.
+
+
+\section{Cookie không được cấu hình thuộc tính HttpOnly}
+
+\subsection{Mức độ: Thấp}
+
+\subsection{Điểm CVSS: 2.20 (CVSS:3.1/AV:N/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N)}
+
+
+\subsection{Mô tả:}
+
+Ứng dụng sử dụng cookie cho mục đích xác thực người dùng nhưng chưa cấu hình đầy đủ các thuộc tính 
+bảo mật cần thiết, cụ thể là thiếu thuộc tính HttpOnly. 
+
+\subsection{Tác động:}
+
+Cookie xác thực có thể bị truy cập và đánh cắp thông qua các hình thức tấn công phía client, chẳng hạn như Cross-Site Scripting (XSS), từ đó dẫn đến nguy cơ chiếm quyền phiên làm việc của người dùng và phát sinh các rủi ro bảo mật liên quan.
+
+\subsection{Tái hiện:}
+
+Cookie được sử dụng để xác thực người dùng nhưng chưa được cấu hình thuộc tính HttpOnly
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image11.png}
+\caption{Cookie của người dùng không có cờ HttpOnly: true}
+\label{fig:image11}
+\end{figure}
+
+\subsection{Vị trí:}
+
+\subsection{Phương án khắc phục:}
+
+Cookie cần được thiết lập đầy đủ các thuộc tính bảo mật, bao gồm HttpOnly để ngăn truy cập từ mã 
+phía client, Secure để đảm bảo cookie chỉ được truyền qua kết nối HTTPS, và SameSite nhằm hạn chế 
+nguy cơ tấn công Cross-Site Request Forgery.
+
+\section{Lỗ hổng Stored XSS (Cross-Site Scripting)}
+
+\subsection{Mức độ: Cao}
+
+\subsection{Điểm CVSS: 8.20 (CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N)}
+
+
+\subsection{Mô tả:}
+
+\subsection{Tác động:}
+
+\subsection{Tái hiện:}
+
+Truy cập trang Lịch để tạo sự kiện: https://lms.hust.edu.vn/calendar/view.php
+
+Chọn một ngày và Tạo sự kiện mới.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image12.png}
+\caption{Cookie của người dùng không có cờ HttpOnly: true}
+\label{fig:image12}
+\end{figure}
+
+Chèn Media: Trong phần Description (Mô tả) của sự kiện, chọn Insert Video.
+
+Chọn tùy chọn chèn Audio/Video.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image13.png}
+\caption{Tạo sự kiện mới}
+\label{fig:image13}
+\end{figure}
+
+Tìm đến phần Subtitles and Captions. Trong trường Label chèn payload XSS
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image14.png}
+\caption{Chọn tùy chọn chèn Audio/Video}
+\label{fig:image14}
+\end{figure}
+
+Ví dụ payload đã chèn để lấy cookie ra webhook
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image15.png}
+\caption{Chèn payload XSS trong trường Label}
+\label{fig:image15}
+\end{figure}
+
+Khi người dùng load phải trang , cookie người dùng sẽ tự động được gửi ra ngoài vào webhook (Vì không có HttpOnly)
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image16.png}
+\caption{Khi người dùng load phải trang, cookie người dùng sẽ tự động được gửi ra ngoài vào webhook}
+\label{fig:image16}
+\end{figure}
+
+Truy cập vào webhook, quan sát đã lấy được cookie
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image17.png}
+\caption{Cookie của người dùng không có cờ HttpOnly}
+\label{fig:image17}
+\end{figure}
+
+Tương tự với payload alert
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image18.png}
+\caption{Lấy cookie thành công trên webhook}
+\label{fig:image18}
+\end{figure}
+
+Chuỗi payload <img src="1" onerror="alert('XSS')"> được ứng dụng phản hồi và chèn trực tiếp vào mã HTML của trang mà không thực hiện xử lý hoặc mã hóa dữ liệu đầu vào. Cụ thể, payload này xuất hiện bên trong thẻ <span class="vjs-menu-item-text">, khiến trình duyệt diễn giải nội dung dưới dạng mã HTML hợp lệ thay vì văn bản thuần túy.
+
+Khi người dùng truy cập vào trang lịch có chứa mô tả kèm video, trình duyệt sẽ cố gắng tải tài nguyên hình ảnh từ giá trị src="1", là một nguồn không tồn tại. Quá trình này dẫn đến việc kích hoạt sự kiện onerror, từ đó thực thi đoạn mã JavaScript alert('XSS'). Hành vi này chứng minh rằng ứng dụng tồn tại lỗ hổng Cross-Site Scripting (XSS) do không kiểm soát và xử lý an toàn dữ liệu đầu vào trước khi hiển thị ra phía client.
+
+
+\textbf{Vị trí}:
+
+\textbf{Phương án khắc phục}:
+
+\section{Lỗ hổng SQL Injection}
+
+\subsection{Mức độ:}
+
+\subsection{Điểm CVSS:}
+
+\subsection{Mô tả:}
+
+Ứng dụng tồn tại lỗ hổng SQL Injection (Blind/Time-based) tại tham số sort trong request 
+được gửi từ chức năng Dashboard. Do giá trị của sort được đưa trực tiếp vào câu truy vấn 
+SQL mà không được kiểm soát, kẻ tấn công có thể chèn ký tự đặc biệt để làm 
+thay đổi cú pháp truy vấn. 
+
+\subsection{Tác động:}
+
+lỗ hổng SQL Injection cho phép kẻ tấn công xác định và liệt kê tên các bảng trong cơ sở 
+dữ liệu thông qua kỹ thuật suy luận. Mặc dù chưa truy xuất trực tiếp 
+nội dung dữ liệu, việc lộ cấu trúc CSDL đã cung cấp thông tin quan trọng về cách tổ chức 
+và các thành phần bên trong hệ thống.
+
+Thông tin này có thể được sử dụng làm bước đệm cho các kịch bản tấn công nâng cao hơn 
+trong trường hợp lỗ hổng không được khắc phục, chẳng hạn như mở rộng khai thác để đọc dữ 
+liệu, kết hợp với các lỗ hổng khác, hoặc hỗ trợ phân tích sâu kiến trúc hệ thống. Điều này 
+tiềm ẩn rủi ro đối với tính bảo mật tổng thể của ứng dụng và cần được xử lý sớm.
+
+\subsection{Tái hiện:}
+
+Truy cập chức năng Dashboard ta có được request như sau:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image19.png}
+\caption{Truy cập vào chức năng Dashboard trên giao diện}
+\label{fig:image19}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image20.png}
+\caption{Request gửi từ chức năng Dashboard}
+\label{fig:image20}
+\end{figure}
+
+Qua phân tích, nhận thấy tham số sort trong request có dấu hiệu không được 
+kiểm soát chặt chẽ. Cụ thể, khi truyền ký tự đặc biệt như dấu chấm phẩy 
+(;) vào tham số sort, phản hồi từ server thay đổi bất thường.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image21.png}
+\caption{Chèn dấu chấm phẩy vào tham số sort}
+\label{fig:image21}
+\end{figure}
+
+Khi bổ sung ký tự comment (--) để vô hiệu hóa phần truy vấn phía sau, 
+ứng dụng hoạt động trở lại bình thường, cho thấy tham số này được chèn 
+trực tiếp vào câu truy vấn SQL.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image22.png}
+\caption{Chèn ký tự comment vào tham số sort}
+\label{fig:image22}
+\end{figure}
+
+Tiếp tục thử nghiệm với payload SQL Injection theo hướng time-based, 
+phản hồi từ server xuất hiện độ trễ rõ rệt (khoảng 5 giây), xác nhận sự 
+tồn tại của lỗ hổng SQL Injection tại tham số sort. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image23.png}
+\caption{Chèn payload time-based vào tham số sort}
+\label{fig:image23}
+\end{figure}
+
+Dựa vào kỹ thuật trên, có thể xác định được độ dài tên database thông qua sự khác biệt về 
+thời gian phản hồi.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image24.png}
+\caption{Chèn payload xác định độ dài database vào tham số sort}
+\label{fig:image24}
+\end{figure}
+
+Từ kết quả trên, tiến hành kiểm tra sự tồn tại của các bảng trong 
+cơ sở dữ liệu bằng cách chèn các truy vấn kiểm chứng. Khi cung cấp tên 
+bảng hợp lệ, ứng dụng trả về phản hồi bình thường; ngược lại, với tên bảng 
+không tồn tại, hệ thống phát sinh lỗi.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image25.png}
+\caption{Ứng dụng trả về phản hồi bình thường nếu tên bảng đúng}
+\label{fig:image25}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image26.png}
+\caption{Ứng dụng trả về phản hồi lỗi nếu tên bảng sai}
+\label{fig:image26}
+\end{figure}
+
+Cuối cùng, sử dụng công cụ tự động hóa để lần lượt gửi các payload tương 
+ứng, qua đó liệt kê được danh sách tên các bảng trong cơ sở dữ liệu như ảnh sau.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image27.png}
+\caption{Liệt kê thành công các bảng trong cơ sở dữ liệu}
+\label{fig:image27}
+\end{figure}
+
+\subsection{Vị trí:}
+
+\subsection{Phương án khắc phục:}
+Không ghép trực tiếp dữ liệu đầu vào của người dùng vào câu truy vấn SQL. 
+Ứng dụng cần sử dụng truy vấn tham số hóa để đảm bảo 
+dữ liệu đầu vào không làm thay đổi cú pháp truy vấn.
+
+Đối với tham số sort, cần giới hạn giá trị hợp lệ theo whitelist 
+(chỉ cho phép các trường sắp xếp đã được định nghĩa sẵn) và từ chối mọi 
+giá trị ngoài danh sách này. Đồng thời, thực hiện kiểm tra và lọc dữ liệu 
+đầu vào phía server.
+
+Ngoài ra, ứng dụng nên ẩn thông báo lỗi chi tiết từ CSDL và chỉ trả về 
+thông báo chung cho người dùng, nhằm tránh lộ thông tin hỗ trợ khai thác.
+
+\section{Lỗ hổng HTTP Request smuggling}
+
+\subsection{Mức độ:}
+
+\subsection{Điểm CVSS:}
+
+\subsection{Mô tả:}
+
+\subsection{Tác động:}
+
+\subsection{Tái hiện:}
+
+\subsection{Vị trí:}
+
+\subsection{Phương án khắc phục:}
+
+\section{Hỗ trợ thuật toán mã hóa yếu trong TLS 1.2}
+
+\subsection{Mức độ:}
+
+\subsection{Điểm CVSS:}
+
+\subsection{Mô tả:}
+
+Ứng dụng được phát hiện đang cấu hình cho phép sử dụng một số thuật toán 
+và bộ mã hóa TLS yếu hoặc đã lỗi thời trong quá trình thiết lập kết nối 
+HTTPS giữa máy khách và máy chủ. 
+
+\subsection{Tác động:}
+
+Việc sử dụng các bộ mã hóa TLS yếu có thể làm suy giảm mức độ an toàn 
+của kênh truyền dữ liệu. Trong một số điều kiện nhất định, kẻ tấn công 
+có khả năng phân tích hoặc giải mã dữ liệu truyền tải, từ đó làm tăng 
+nguy cơ rò rỉ thông tin nhạy cảm như thông tin xác thực, dữ liệu người 
+dùng hoặc token phiên làm việc. Bên cạnh đó, cấu hình này khiến cơ chế 
+bảo mật TLS của hệ thống không đáp ứng các khuyến nghị và tiêu chuẩn bảo 
+mật hiện hành (ví dụ: OWASP, Mozilla TLS Guide), đồng thời có thể ảnh 
+hưởng đến yêu cầu tuân thủ các tiêu chuẩn an toàn thông tin trong môi 
+trường triển khai thực tế.
+
+\subsection{Tái hiện:}
+
+Kết quả kiểm tra cấu hình SSL/TLS của máy chủ bằng công cụ SSL Labs cho thấy hệ thống vẫn hỗ trợ nhiều 
+TLS 1.2 cipher suites bị đánh giá là yếu (WEAK). Các cipher này vẫn được sử dụng trong quá trình thiết 
+lập kết nối TLS giữa máy khách và máy chủ, cho thấy cấu hình hiện tại chưa loại bỏ các thuật toán mã 
+hóa TLS 1.2 không còn được khuyến nghị theo các tiêu chuẩn bảo mật hiện hành.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image29.png}
+\caption{TLS 1.2 hỗ trợ các thuật toán mã hóa yếu}
+\label{fig:image29}
+\end{figure}
+
+
+
+\subsection{Vị trí:}
+
+\subsection{Phương án khắc phục:}
+
+Cần vô hiệu hóa toàn bộ các bộ mã hóa TLS yếu, đồng thời chỉ cho phép sử dụng các bộ mã hóa 
+mạnh được khuyến nghị theo các tiêu chuẩn bảo mật hiện hành.
+
+\subsection{Tham chiếu:} 
+OWASP Web Security Testing Guide - WSTG-CRYP-01: Testing for Weak Transport Layer Security
+
+
+\end{document}
