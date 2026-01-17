@@ -95,7 +95,7 @@ chính của hệ thống LMS, kèm theo mô tả và các chức năng tương 
 trang. Việc phân tích chi tiết này đóng vai trò quan trọng trong việc xác định các điểm cần kiểm thử và xây 
 dựng các kịch bản đánh giá an toàn bảo mật trong các bước tiếp theo của đồ án.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|p{3.5cm}|p{7cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{7cm}|}
 
 \caption{Mô tả chi tiết chức năng của các module phần mềm Sinh viên}\\
 \hline
@@ -191,7 +191,7 @@ Xem thông tin các bài viết diễn đàn.
 
 Xem thông tin các cuộc thảo luận trong diễn đàn.
 
-Xem thông tin Learning plans.
+Xem thông tin kế hoạch học tập.
 \\
 \hline
 
@@ -312,13 +312,13 @@ thử tập trung vào việc rà soát các cấu hình có nguy cơ làm lộ 
 sách bảo mật HTTP, cơ chế phân quyền truy cập tài nguyên, cũng như các sai sót trong quá 
 trình triển khai có thể dẫn đến rủi ro mất an toàn thông tin.
 
-Bảng 4.3 dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-CONF, qua đó 
+Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-CONF, qua đó 
 phản ánh các cấu hình đã đáp ứng yêu cầu an toàn bảo mật, các trường hợp chưa đạt, cũng như 
 những hạng mục không thể tiến hành kiểm thử do giới hạn về quyền truy cập trong phạm vi đánh 
 giá. Các kết quả này được sử dụng làm cơ sở cho việc nhận diện các vấn đề cấu hình tồn tại và 
 đề xuất các biện pháp khắc phục phù hợp trong các phần tiếp theo của đồ án.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{5cm}|p{7cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{5cm}|>{\centering\arraybackslash}p{7cm}|}
 
 \caption{Kết quả kiểm thử cấu hình và triển khai} \\
 \hline
@@ -383,11 +383,11 @@ trình đăng ký và cấp tài khoản, khả năng liệt kê hoặc suy đo�
 đặt tên người dùng. Việc đánh giá các hạng mục này giúp xác định những điểm yếu có thể bị lợi 
 dụng để thu thập thông tin người dùng hoặc làm tiền đề cho các hình thức tấn công tiếp theo.
 
-Bảng 4.4 dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-IDNT, qua đó 
+Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-IDNT, qua đó 
 thể hiện các cơ chế quản lý định danh đã đáp ứng yêu cầu an toàn bảo mật cũng như các vấn đề 
 còn tồn tại cần được lưu ý và khắc phục.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{5cm}|p{7cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{5cm}|>{\centering\arraybackslash}p{7cm}|}
 \caption{Kết quả kiểm thử quản lý định danh}\\
 
 \hline
@@ -424,11 +424,11 @@ kiểm thử tập trung vào việc xác định các điểm yếu có thể �
 khoản người dùng, cũng như các nguy cơ rò rỉ thông tin xác thực trong quá trình sử dụng hệ 
 thống.
 
-Bảng 4.5. dưới đây trình bày tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-ATHN, 
+Bảng dưới đây trình bày tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-ATHN, 
 qua đó phản ánh các cơ chế xác thực đã đáp ứng yêu cầu an toàn bảo mật, các chức năng không 
 được triển khai, cũng như những vấn đề còn tồn tại cần được xem xét và khắc phục.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{5.5cm}|p{7cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{5.5cm}|>{\centering\arraybackslash}p{7cm}|}
 \caption{Kết quả kiểm thử xác thực}\\
 
 \hline
@@ -493,11 +493,11 @@ tập trung vào việc xác định khả năng vượt qua cơ chế phân quy
 nguyên không được phép, leo thang đặc quyền, cũng như các lỗ hổng liên quan đến tham chiếu 
 trực tiếp đối tượng không an toàn và các điểm yếu trong quá trình tích hợp OAuth.
 
-Bảng 4.6 dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-ATHZ, qua đó 
+Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-ATHZ, qua đó 
 phản ánh các cơ chế phân quyền đã đáp ứng yêu cầu an toàn bảo mật cũng như các lỗ hổng còn 
 tồn tại cần được xem xét và khắc phục nhằm hạn chế nguy cơ truy cập trái phép vào hệ thống.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{6cm}|p{6cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{6cm}|}
 \caption{Kết quả kiểm thử phân quyền}\\
 \hline
 \textbf{ID} & \textbf{Nội dung} & \textbf{Kết luận} \\
@@ -543,11 +543,11 @@ trung vào việc phân tích cách thức tạo và quản lý phiên, cấu h�
 cơ chế kết thúc và hết hạn phiên, cũng như các nguy cơ liên quan đến chiếm đoạt hoặc lạm dụng 
 phiên làm việc.
 
-Bảng 4.7 dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-SESS, qua đó 
+Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-SESS, qua đó 
 phản ánh các cơ chế quản lý phiên đã đáp ứng yêu cầu an toàn bảo mật, các vấn đề cấu hình 
 chưa phù hợp và những rủi ro tiềm ẩn cần được xem xét và khắc phục trong các phần tiếp theo.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{5cm}|p{7cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{5cm}|>{\centering\arraybackslash}p{7cm}|}
 \caption{Kết quả kiểm thử quản lý phiên}\\
 
 \hline
@@ -613,12 +613,12 @@ từ việc thiếu hoặc thực hiện không đầy đủ cơ chế kiểm tr
 tấn công như XSS, Injection, giả mạo yêu cầu HTTP và các kỹ thuật khai thác liên quan đến xử 
 lý tham số.
 
-Bảng 4.8 dưới đây trình bày tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-INPV, 
+Bảng dưới đây trình bày tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-INPV, 
 qua đó phản ánh các cơ chế kiểm soát dữ liệu đầu vào đã đáp ứng yêu cầu an toàn bảo mật, đồng 
 thời chỉ ra các trường hợp chưa đạt và những lỗ hổng còn tồn tại có thể bị khai thác nếu không 
 được khắc phục kịp thời.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{2cm}|p{7cm}|p{5cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{7cm}|>{\centering\arraybackslash}p{5cm}|}
 \caption{Kết quả kiểm thử xác thực đầu vào}\\
 \hline
 \textbf{ID} & \textbf{Nội dung} & \textbf{Kết luận} \\
@@ -680,10 +680,10 @@ lỗi phát sinh trong quá trình vận hành. Nội dung kiểm thử tập tr
 qua thông báo lỗi không phù hợp, stack trace hoặc các phản hồi chi tiết từ phía máy chủ, vốn có thể bị kẻ tấn công lợi dụng để 
 thu thập thông tin phục vụ cho các bước tấn công tiếp theo.
 
-Bảng 4.9 dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-ERRH, qua đó phản ánh mức độ an toàn của cơ chế 
+Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-ERRH, qua đó phản ánh mức độ an toàn của cơ chế 
 xử lý lỗi hiện tại cũng như khả năng kiểm soát thông tin được trả về cho người dùng khi xảy ra lỗi.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|p{7cm}|p{3.5cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{7cm}|>{\centering\arraybackslash}p{3.5cm}|}
 \caption{Kết quả kiểm thử xử lý lỗi}\\
 \hline
 \textbf{ID} & \textbf{Nội dung} & \textbf{Kết luận} \\
@@ -709,11 +709,11 @@ kiểm thử tập trung vào việc xác định các điểm yếu liên quan 
 các thuật toán hoặc bộ mã hóa không còn an toàn, cũng như nguy cơ rò rỉ thông tin nhạy cảm khi dữ 
 liệu được truyền qua các kênh không được mã hóa đầy đủ.
 
-Bảng 4.10 dưới đây trình bày tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-CRYP, qua đó 
+Bảng dưới đây trình bày tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-CRYP, qua đó 
 phản ánh mức độ tuân thủ các yêu cầu bảo mật về mật mã của hệ thống, đồng thời chỉ ra các trường hợp 
 chưa đạt do tồn tại các cấu hình hoặc cơ chế mã hóa yếu cần được xem xét và khắc phục.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|p{7cm}|p{3.5cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{7cm}|>{\centering\arraybackslash}p{3.5cm}|}
 \caption{Kết quả kiểm thử mật mã yếu}\\
 \hline
 \textbf{ID} & \textbf{Nội dung} & \textbf{Kết luận} \\
@@ -744,11 +744,11 @@ việc xác định các lỗ hổng phát sinh từ việc thực thi mã phía
 liệu trên trình duyệt, cũng như các cơ chế bảo vệ liên quan đến chia sẻ tài nguyên và tương tác giữa 
 các thành phần phía client.
 
-Bảng 4.11 dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-CLNT, qua đó phản ánh 
+Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-CLNT, qua đó phản ánh 
 các chức năng phía client đã đáp ứng yêu cầu an toàn bảo mật, các trường hợp chưa đạt hoặc còn tồn 
 tại rủi ro, cũng như những hạng mục chưa thể đánh giá đầy đủ do giới hạn của mô hình kiểm thử hộp đen.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|p{7cm}|p{3.5cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{7cm}|>{\centering\arraybackslash}p{3.5cm}|}
 \caption{Kết quả kiểm thử phía máy người dùng}\\
 \hline
 \textbf{ID} & \textbf{Nội dung} & \textbf{Kết luận} \\

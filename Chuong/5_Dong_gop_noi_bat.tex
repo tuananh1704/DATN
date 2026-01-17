@@ -1,12 +1,57 @@
 \documentclass[../DoAn.tex]{subfiles}
 \begin{document}
 
+Chương này trình bày một cách toàn diện các lỗ hổng bảo mật 
+được phát hiện trong quá trình thực hiện kiểm thử xâm nhập 
+đối với hệ thống. Mỗi lỗ hổng được phân tích chi tiết dựa 
+trên bản chất kỹ thuật, mức độ rủi ro bảo mật và các tác động 
+tiềm ẩn đối với hệ thống. Đô án cũng cung cấp minh chứng 
+khai thác nhằm làm rõ khả năng bị 
+lợi dụng của lỗ hổng, đồng thời đề xuất các biện pháp khắc 
+phục cụ thể để giảm thiểu rủi ro và góp phần nâng cao mức độ 
+an toàn tổng thể của hệ thống lms.hust.edu.vn.
+
 \section{Tổng quan }
 
-\section{Lỗ hổng lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất}
-\subsection{Mức độ: Trung bình}
+Tổng cộng, đồ án đã tiến hành đánh giá bảo mật hệ thống dựa trên 10 hạng mục 
+kiểm thử theo hướng dẫn của OWASP Web Security Testing Guide. Kết quả cho thấy 
+8 lỗ hổng bảo mật đã được phát hiện, trong đó 3 lỗ hổng được đánh giá có mức 
+độ rủi ro thấp và 5 lỗ hổng được đánh giá có mức độ rủi ro cao. Bảng dưới đây 
+trình bày thông tin tổng quan về các lỗ hổng bảo mật được phát hiện trong quá trình kiểm thử.
 
-\subsection{Điểm CVSS: 3.2 (CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:H/A:N)}
+\begin{longtable}{|>{\centering\arraybackslash}p{1cm}|>{\centering\arraybackslash}p{8cm}|>{\centering\arraybackslash}p{5cm}|}
+\caption{Tổng quan các lỗ hổng}\\
+\hline
+\textbf{STT} & \textbf{Lỗ hổng} & \textbf{Mức độ nghiêm trọng} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{STT} & \textbf{Lỗ hổng} & \textbf{Mức độ nghiêm trọng} \\
+\hline
+\endhead
+
+1 & Lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất & Thấp \\ \hline
+2 & Chính sách mật khẩu yếu & Cao \\ \hline
+3 & Lỗ hổng Insecure Direct Object Reference (IDOR) & Cao \\ \hline
+4 & Cookie không có cờ HttpOnly & Thấp \\ \hline
+5 & Lỗ hổng Stored XSS (Cross-Site Scripting) & Cao \\ \hline
+6 & Lỗ hổng SQL Injection & Cao \\ \hline
+7 & Lỗ hổng HTTP Request smuggling & Cao \\ \hline
+8 & Hỗ trợ thuật toán mã hóa yếu trong TLS 1.2 & Thấp \\ \hline
+\end{longtable}
+
+\section{Lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất}
+\subsection{Đánh giá rủi ro bảo mật: Thấp}
+
+Dựa trên phương pháp OWASP Risk Rating, lỗ hổng lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất được đánh giá với hệ số khả năng khai thác là 4.625 và hệ số tác động là 0.5. Kết quả cho thấy khả năng bị khai thác ở mức trung bình trong khi mức độ tác động là thấp, do đó mức độ rủi ro tổng thể của lỗ hổng được xác định ở mức Thấp.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/Capture1.png}
+\caption{Đánh giá rủi ro bảo mật cho lỗ hổng lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất}
+\label{fig:Capture1}
+\end{figure}
 
 \subsection{Mô tả:}
 Sau khi người dùng thực hiện đăng xuất khỏi ứng dụng web, khi sử dụng chức năng “Back” 
@@ -54,7 +99,26 @@ Nhấn nút “back trên trình duyệt”, quan sát thấy vẫn trả về t
 \label{fig:image3}
 \end{figure}
 
-\subsection{Biện pháp khắc phục:}
+\subsection{Vị trí:}
+
+\begin{longtable}{|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{8.3cm}|}
+\caption{\centering Danh sách đường dẫn được ghi nhận cho lỗ hổng lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất}\\
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endhead
+
+1 & GET & https://lms.hust.edu.vn/ \\ \hline
+
+\end{longtable}
+
+
+\subsection{Phương án khắc phục:}
 
 Ứng dụng cần được cấu hình để không lưu trữ bộ nhớ đệm đối với các trang chứa thông tin nhạy cảm bằng cách thiết lập các tiêu đề HTTP phù hợp trong phản hồi, chẳng hạn như Cache-Control: no-cache, no-store, must-revalidate, nhằm ngăn chặn việc hiển thị lại nội dung sau khi người dùng đã đăng xuất.
 
@@ -63,12 +127,20 @@ Bên cạnh đó, toàn bộ ứng dụng cần được triển khai trên giao
 Ngoài ra, phiên làm việc của người dùng cần được vô hiệu hóa đúng cách tại phía máy chủ khi thực hiện đăng xuất, đồng thời đảm bảo tất cả các yêu cầu truy cập sau khi đăng xuất đều được chuyển hướng về trang đăng nhập để yêu cầu xác thực lại.
 
 \subsection{Tham chiếu:}
+OWASP Web Security Testing Guide - WSTG-ATHN-06: Testing for Browser Cache Weaknesses
 
 \section{Chính sách mật khẩu yếu}
 
-\subsection{Mức độ: Thấp}
+\subsection{Đánh giá rủi ro bảo mật: Cao}
 
-\subsection{Điểm CVSS: 3.10 (CVSS:3.1/AV:N/AC:H/PR:H/UI:R/S:U/C:L/I:L/A:N)}
+Dựa trên phương pháp OWASP Risk Rating, lỗ hổng chính sách mật khẩu yếu được đánh giá với hệ số khả năng khai thác là 6.5 và hệ số tác động là 4.0. Kết quả cho thấy lỗ hổng có khả năng bị khai thác cao và mức độ tác động ở mức trung bình, do đó mức độ rủi ro tổng thể của lỗ hổng được xác định ở mức Cao.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/Capture2.png}
+\caption{Đánh giá rủi ro bảo mật cho chính sách mật khẩu yếu}
+\label{fig:Capture2}
+\end{figure}
 
 \subsection{Mô tả:}
 Trong chức năng đăng nhập, ứng dụng chỉ áp dụng yêu cầu tối thiểu về độ dài mật khẩu là 8 ký tự, nhưng chưa có các ràng buộc về độ phức tạp như việc bắt buộc sử dụng chữ cái in hoa, chữ cái thường, chữ số hoặc ký tự đặc biệt. Bên cạnh đó, trong chức năng thay đổi mật khẩu, hệ thống vẫn cho phép người dùng thiết lập mật khẩu mới trùng với mật khẩu cũ, dẫn đến việc không đảm bảo cải thiện mức độ an toàn của thông tin xác thực.
@@ -96,6 +168,23 @@ Chức năng thay đổi mật khẩu cho phép người dùng thiết lập m�
 
 \subsection{Vị trí:}
 
+\begin{longtable}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{9.5cm}|}
+\caption{Đường dẫn được ghi nhận cho chính sách mật khẩu yếu}\\
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endhead
+
+1 & POST & https://sso.hust.edu.vn/adfs/portal/updatepassword \\ \hline
+
+\end{longtable}
+
+
 \subsection{Phương án khắc phục:}
 
 Ứng dụng cần áp dụng chính sách mật khẩu mạnh và nhất quán, bao gồm các yêu cầu về độ phức tạp, thời hạn sử dụng và khả năng tái sử dụng mật khẩu. Cụ thể, hệ thống nên quy định rõ độ dài tối thiểu và tối đa của mật khẩu nhằm đảm bảo mức độ an toàn cần thiết. Đồng thời, cần thiết lập cơ chế kiểm soát lịch sử mật khẩu để hạn chế việc sử dụng lại các mật khẩu đã từng được dùng trước đó, bao gồm việc xác định số lần đổi mật khẩu tối thiểu hoặc khoảng thời gian cần thiết trước khi cho phép tái sử dụng một mật khẩu cũ.
@@ -104,14 +193,22 @@ Bên cạnh đó, ứng dụng cần ngăn chặn việc sử dụng các mật 
 
 Ngoài ra, chính sách mật khẩu cần được áp dụng đồng nhất trên toàn bộ các chức năng liên quan đến xác thực, bao gồm tạo tài khoản, thay đổi mật khẩu và khôi phục mật khẩu, nhằm đảm bảo tính nhất quán và giảm thiểu nguy cơ phát sinh các điểm yếu bảo mật trong hệ thống.
 
-\subsection{Tham chiếu:} WSTG-ATHN-07: Testing for Weak Authentication Methods
+\subsection{Tham chiếu:} 
+
+OWASP Web Security Testing Guide - WSTG-ATHN-07: Testing for Weak Authentication Methods
 
 \section{Lỗ hổng Insecure Direct Object References (IDOR)}
 
-\subsection{Mức độ: Cao}
+\subsection{Đánh giá rủi ro bảo mật: Cao}
 
-\subsection{Điểm CVSS: 7.1 (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:N)}
+Dựa trên phương pháp OWASP Risk Rating, lỗ hổng Insecure Direct Object References (IDOR) được đánh giá với hệ số khả năng khai thác là 6.25 và hệ số tác động là 3.25. Kết quả cho thấy lỗ hổng có khả năng bị khai thác cao và mức độ tác động ở mức trung bình, do đó mức độ rủi ro tổng thể của lỗ hổng được xác định ở mức Cao.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/Capture3.png}
+\caption{Đánh giá rủi ro bảo mật cho lỗ hổng IDOR}
+\label{fig:Capture3}
+\end{figure}
 
 \subsection{Mô tả:}
 
@@ -176,18 +273,48 @@ Kiểm tra bên tài khoản Anh.NT thì liên kết đã bị xóa
 
 \subsection{Vị trí:}
 
+\begin{longtable}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10.5cm}|}
+\caption{\centering Danh sách đường dẫn được ghi nhận cho lỗ hổng IDOR}\\
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endhead
+
+1 & GET & https://lms.hust.edu.vn/auth/oauth2/linkedlogins.php \\ \hline
+
+\end{longtable}
+
 \subsection{Phương án khắc phục:}
 
 Hệ thống cần thực hiện xác thực quyền sở hữu đối tượng trước khi cho phép thao tác. Cụ thể, khi xử lý yêu cầu xóa liên kết tài khoản, máy chủ phải kiểm tra và đảm bảo rằng giá trị linkedLoginId được gửi trong yêu cầu thực sự thuộc quyền sở hữu của người dùng đang đăng nhập.
 
 Bên cạnh đó, hệ thống nên sử dụng các định danh nội bộ khó đoán, chẳng hạn như UUID hoặc các giá trị được băm, thay vì sử dụng các định danh dạng tăng dần. Việc này giúp giảm khả năng suy đoán hoặc liệt kê các định danh hợp lệ, từ đó hạn chế nguy cơ khai thác lỗ hổng IDOR.
 
+\subsection{Tham chiếu:}
+OWASP Web Security Testing Guide - WSTG-ATHZ-04: Testing for Insecure Direct Object References
 
 \section{Cookie không được cấu hình thuộc tính HttpOnly}
 
-\subsection{Mức độ: Thấp}
+\subsection{Đánh giá rủi ro bảo mật: Thấp}
 
-\subsection{Điểm CVSS: 2.20 (CVSS:3.1/AV:N/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N)}
+Dựa trên phương pháp OWASP Risk Rating, lỗ hổng cookie 
+không được cấu hình thuộc tính HttpOnly được đánh giá với hệ số khả 
+năng khai thác là 4.125 và hệ số tác động là 1.00. Kết quả cho thấy 
+khả năng bị khai thác ở mức trung bình trong khi mức độ tác động 
+là thấp, do đó mức độ rủi ro tổng thể của lỗ hổng được xác định ở 
+mức Thấp.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/Capture4.png}
+\caption{Đánh giá rủi ro bảo mật cho Cookie không được cấu hình thuộc tính HttpOnly}
+\label{fig:Capture4}
+\end{figure}
 
 
 \subsection{Mô tả:}
@@ -212,22 +339,58 @@ Cookie được sử dụng để xác thực người dùng nhưng chưa đư�
 
 \subsection{Vị trí:}
 
+\begin{longtable}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10.5cm}|}
+\caption{Danh sách đường dẫn được ghi nhận cho Cookie không được cấu hình thuộc tính HttpOnly}\\
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endhead
+
+1 & GET & https://lms.hust.edu.vn/ \\ \hline
+
+\end{longtable}
+
 \subsection{Phương án khắc phục:}
 
 Cookie cần được thiết lập đầy đủ các thuộc tính bảo mật, bao gồm HttpOnly để ngăn truy cập từ mã 
 phía client, Secure để đảm bảo cookie chỉ được truyền qua kết nối HTTPS, và SameSite nhằm hạn chế 
 nguy cơ tấn công Cross-Site Request Forgery.
 
+\subsection{Tham chiếu:}
+OWASP Web Security Testing Guide - WSTG-SESS-02: Testing for Cookies Attributes
+
 \section{Lỗ hổng Stored XSS (Cross-Site Scripting)}
 
-\subsection{Mức độ: Cao}
+\subsection{Đánh giá rủi ro bảo mật: Cao}
 
-\subsection{Điểm CVSS: 8.20 (CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N)}
+Dựa trên phương pháp OWASP Risk Rating, lỗ hổng Stored Cross-Site Scripting (XSS) được đánh giá với hệ số khả năng khai thác là 6.125 và hệ số tác động là 5.0. Kết quả cho thấy lỗ hổng có khả năng bị khai thác cao và mức độ tác động ở mức trung bình, do đó mức độ rủi ro tổng thể của lỗ hổng được xác định ở mức Cao.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/Capture5.png}
+\caption{Đánh giá rủi ro bảo mật cho lỗ hổng Stored XSS}
+\label{fig:Capture5}
+\end{figure}
 
 
 \subsection{Mô tả:}
 
+Ứng dụng tồn tại lỗ hổng Stored Cross-Site Scripting (Stored XSS) trong chức 
+năng tạo và hiển thị sự kiện trên trang Lịch. Cụ thể, dữ liệu người dùng nhập 
+vào trường Label của sự kiện không được kiểm tra, lọc bỏ hoặc mã hóa an 
+toàn trước khi được lưu trữ và hiển thị lại trên trình duyệt.
+
 \subsection{Tác động:}
+
+Lỗ hổng Stored XSS cho phép kẻ tấn công thực thi mã JavaScript tùy ý trong trình duyệt của người dùng khi họ truy cập trang lịch chứa nội dung độc hại.
+Do cookie phiên của ứng dụng không được cấu hình thuộc tính HttpOnly, kẻ tấn 
+công có thể trực tiếp đánh cắp cookie người dùng thông qua JavaScript và gửi 
+ra ngoài, từ đó chiếm quyền truy cập tài khoản.
 
 \subsection{Tái hiện:}
 
@@ -271,7 +434,7 @@ Ví dụ payload đã chèn để lấy cookie ra webhook
 \label{fig:image15}
 \end{figure}
 
-Khi người dùng load phải trang , cookie người dùng sẽ tự động được gửi ra ngoài vào webhook (Vì không có HttpOnly)
+Khi người dùng truy cập trang, cookie người dùng sẽ tự động được gửi ra ngoài vào webhook (Vì không có HttpOnly)
 
 \begin{figure}[H]
 \centering
@@ -285,33 +448,57 @@ Truy cập vào webhook, quan sát đã lấy được cookie
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\linewidth]{Hinhve/image17.png}
-\caption{Cookie của người dùng không có cờ HttpOnly}
+\caption{Lấy cookie thành công trên webhook}
 \label{fig:image17}
 \end{figure}
-
-Tương tự với payload alert
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=1\linewidth]{Hinhve/image18.png}
-\caption{Lấy cookie thành công trên webhook}
-\label{fig:image18}
-\end{figure}
-
-Chuỗi payload <img src="1" onerror="alert('XSS')"> được ứng dụng phản hồi và chèn trực tiếp vào mã HTML của trang mà không thực hiện xử lý hoặc mã hóa dữ liệu đầu vào. Cụ thể, payload này xuất hiện bên trong thẻ <span class="vjs-menu-item-text">, khiến trình duyệt diễn giải nội dung dưới dạng mã HTML hợp lệ thay vì văn bản thuần túy.
-
-Khi người dùng truy cập vào trang lịch có chứa mô tả kèm video, trình duyệt sẽ cố gắng tải tài nguyên hình ảnh từ giá trị src="1", là một nguồn không tồn tại. Quá trình này dẫn đến việc kích hoạt sự kiện onerror, từ đó thực thi đoạn mã JavaScript alert('XSS'). Hành vi này chứng minh rằng ứng dụng tồn tại lỗ hổng Cross-Site Scripting (XSS) do không kiểm soát và xử lý an toàn dữ liệu đầu vào trước khi hiển thị ra phía client.
 
 
 \textbf{Vị trí}:
 
-\textbf{Phương án khắc phục}:
+\begin{longtable}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10.5cm}|}
+\caption{Danh sách đường dẫn được ghi nhận cho lỗ hổng Stored XSS}\\
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endhead
+
+1 & POST & https://lms.hust.edu.vn/calendar/view.php \\ \hline
+
+\end{longtable}
+
+\subsection{Phương án khắc phục:}
+
+Hệ thống cần kiểm tra và làm sạch toàn bộ dữ liệu đầu vào do người dùng cung cấp, 
+loại bỏ các thẻ và 
+thuộc tính nguy hiểm có khả năng thực thi mã JavaScript.
+
+Dữ liệu hiển thị trên trình duyệt phải được mã hóa đầu ra theo ngữ cảnh để 
+đảm bảo nội dung không bị diễn giải và thực thi dưới dạng mã HTML hoặc 
+JavaScript.
+
+Cookie phiên cần được cấu hình đầy đủ các thuộc tính bảo mật như HttpOnly, 
+Secure và SameSite để ngăn chặn việc đánh cắp cookie thông qua XSS.
+
+\subsection{Tham chiếu:}
+OWASP Web Security Testing Guide - WSTG-INPV-02: Testing for Stored Cross Site Scripting
 
 \section{Lỗ hổng SQL Injection}
 
-\subsection{Mức độ:}
+\subsection{Đánh giá rủi ro bảo mật: Cao}
 
-\subsection{Điểm CVSS:}
+Dựa trên phương pháp OWASP Risk Rating, lỗ hổng SQL Injection được đánh giá với hệ số khả năng khai thác là 6.125 và hệ số tác động là 5.75. Kết quả cho thấy lỗ hổng có khả năng bị khai thác cao và mức độ tác động ở mức trung bình, do đó mức độ rủi ro tổng thể của lỗ hổng được xác định ở mức Cao.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/Capture6.png}
+\caption{Đanh giá rủi ro bảo mật cho lỗ hổng SQL Injection}
+\label{fig:Capture6}
+\end{figure}
 
 \subsection{Mô tả:}
 
@@ -425,6 +612,22 @@ Cuối cùng, sử dụng công cụ tự động hóa để lần lượt gửi
 
 \subsection{Vị trí:}
 
+\begin{longtable}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10.5cm}|}
+\caption{Danh sách đường dẫn được ghi nhận cho lỗ hổng SQL Injection}\\
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endhead
+
+1 & POST & https://lms.hust.edu.vn/lib/ajax/service.php \\ \hline
+
+\end{longtable}
+
 \subsection{Phương án khắc phục:}
 Không ghép trực tiếp dữ liệu đầu vào của người dùng vào câu truy vấn SQL. 
 Ứng dụng cần sử dụng truy vấn tham số hóa để đảm bảo 
@@ -438,27 +641,188 @@ giá trị ngoài danh sách này. Đồng thời, thực hiện kiểm tra và 
 Ngoài ra, ứng dụng nên ẩn thông báo lỗi chi tiết từ CSDL và chỉ trả về 
 thông báo chung cho người dùng, nhằm tránh lộ thông tin hỗ trợ khai thác.
 
+\subsection{Tham chiếu:}
+OWASP Web Security Testing Guide - WSTG-INPV-05: Testing for SQL Injection
+
 \section{Lỗ hổng HTTP Request smuggling}
 
-\subsection{Mức độ:}
+\subsection{Đánh giá rủi ro bảo mật: Cao}
 
-\subsection{Điểm CVSS:}
+Dựa trên phương pháp OWASP Risk Rating, lỗ hổng HTTP Request 
+Smuggling được đánh giá với hệ số khả năng khai thác là 
+4.750 và hệ số tác động là 6.50. Kết quả cho thấy lỗ hổng 
+có khả năng bị khai thác trung bình và mức độ tác động ở mức cao 
+bình, do đó mức độ rủi ro tổng thể của lỗ hổng được xác định 
+ở mức Cao.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/Capture7.png}
+\caption{Đánh giá rủi ro bảo mật cho lỗ hổng HTTP Request Smuggling}
+\label{fig:Capture7}
+\end{figure}
 
 \subsection{Mô tả:}
 
+Hệ thống tồn tại lỗ hổng HTTP Request Smuggling do sự không thống nhất trong 
+cách xử lý các header Content-Length và Transfer-Encoding giữa Front-End server 
+và Back-End server. Trong khi Front-End server xác định độ dài request dựa trên 
+Content-Length, Back-End server lại ưu tiên xử lý theo Transfer-Encoding: 
+chunked. Sự khác biệt này cho phép kẻ tấn công chèn thêm một request ẩn phía 
+sau request hợp lệ trong cùng một kết nối TCP.
+
 \subsection{Tác động:}
+
+Lỗ hổng HTTP Request Smuggling cho phép kẻ tấn công can thiệp vào quá 
+trình xử lý request của những người dùng khác trên cùng kết nối. Thông 
+qua việc chèn request ẩn, kẻ tấn công có thể chiếm quyền điều khiển luồng 
+request tiếp theo được gửi đến Back-End server, từ đó thu thập được toàn bộ 
+nội dung request của nạn nhân, bao gồm cả cookie phiên đăng nhập.
 
 \subsection{Tái hiện:}
 
+Một request hợp lệ tới trang chủ được ghi nhận, 
+trong đó server chấp nhận phương thức POST và sử dụng header 
+Transfer-Encoding: chunked. Đây là điều kiện cần để tiến hành 
+thử nghiệm HTTP Request Smuggling.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image32.png}
+\caption{Server chấp nhận phương thức POST với Transfer-Encoding: chunked}
+\label{fig:image32}
+\end{figure}
+
+Chèn payload gây lỗi phía sau gọi tới 1 trang 404 đồng thời gửi cùng với 
+1 yêu cầu bình thường (gửi trong cùng 1 kết nối tcp để tái hiện nạn nhân 
+sẽ gửi request ngay sau)
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image34.png}
+\caption{Gửi request độc hại chứa payload HTTP Request Smuggling}
+\label{fig:image34}
+\end{figure}
+
+Khi request độc hại được gửi đến, Front-End server xử lý nội dung dựa 
+trên header Content-Length và chuyển toàn bộ phần body sang Back-End 
+server. Trong khi đó, Back-End server lại phân tích request theo header 
+Transfer-Encoding: chunked và dừng xử lý tại ký tự kết thúc chuỗi chunk 
+(0). Phần dữ liệu nằm sau ký tự này, bao gồm request gọi tới đường dẫn 
+/404, không bị loại bỏ mà được giữ lại trong bộ đệm của server. Khi một 
+request hợp lệ khác được gửi ngay sau đó trên cùng kết nối TCP, phần dữ 
+liệu bị giữ lại sẽ được ghép vào đầu request mới và được server xử lý, 
+dẫn đến phản hồi lỗi 404 Not Found, qua đó xác nhận thành công lỗ hổng 
+HTTP Request Smuggling loại CL-TE.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image36.png}
+\caption{Request bình thường gửi ngay sau đó}
+\label{fig:image36}
+\end{figure}
+
+Tiếp tục khai thác sâu hơn, lỗ hổng HTTP Request Smuggling cho phép thu thập 
+thông tin phiên làm việc của request được gửi ngay sau đó. Để thực hiện điều này, cần
+xác định một request sử dụng phương thức POST và có khả năng ghi nhận dữ liệu đã được xác 
+định, và chức năng cập nhật thông tin cá nhân người dùng đáp ứng được yêu cầu này.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image37.png}
+\caption{Chức năng cập nhật thông tin cá nhân người dùng}
+\label{fig:image37}
+\end{figure}
+
+Sau khi thực hiện cập nhật thông tin cá nhân, quan sát Burp Suite bắt
+được request như sau:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image38.png}
+\caption{Chức năng cập nhật thông tin cá nhân người dùng}
+\label{fig:image38}
+\end{figure}
+
+Payload được đưa xuống cuối nội dung của request để khi request 
+tiếp theo bị nối vào, dữ liệu của request này sẽ được hệ thống lưu 
+trực tiếp vào trường Description.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image39.png}
+\caption{Payload chèn vào cuối request cập nhật thông tin cá nhân}
+\label{fig:image39}
+\end{figure}
+
+Nối request này vào request độc hại ban đầu.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image40.png}
+\caption{Nối request vào request độc hại ban đầu}
+\label{fig:image40}
+\end{figure}
+
+Content-Length của request thứ nhất được đặt đủ lớn để bao phủ toàn 
+bộ payload. Content-Length của request được nối phía sau được điều 
+chỉnh để cho phép dữ liệu của request tiếp theo được ghép vào và được 
+hệ thống xử lý như giá trị của biến description\_editor\%5Btext\%5D . Nhờ đó, nội 
+dung của request sau được lưu trực tiếp vào trường Description trên 
+trang web.
+
+Khi một người dùng khác gửi request bất kỳ tới hệ thống, request 
+của họ sẽ bị nối vào phía sau request độc hại do kẻ tấn công tạo ra. 
+Kết quả là toàn bộ nội dung request của nạn nhân, bao gồm cả thông tin 
+phiên đăng nhập, được hệ thống hiển thị và lưu lại trong trường 
+Description trên giao diện của kẻ tấn công.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/image43.png}
+\caption{Request của nạn nhân bị nối vào và hiển thị trên giao diện kẻ tấn công}
+\label{fig:image43}
+\end{figure}
+
+
 \subsection{Vị trí:}
+
+\begin{longtable}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10.5cm}|}
+\caption{Danh sách đường dẫn được ghi nhận cho lỗ hổng HTTP Request Smuggling}\\
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endhead
+
+1 & POST & https://lms.hust.edu.vn/ \\ \hline
+
+\end{longtable}
+
+
 
 \subsection{Phương án khắc phục:}
 
+Để khắc phục lỗ hổng HTTP Request Smuggling, hệ thống cần đảm bảo sự thống 
+nhất trong cách xử lý HTTP request giữa Front-End và Back-End server. Server 
+phải được cấu hình để chỉ chấp nhận một cơ chế xác định độ dài request và 
+không cho phép đồng thời tồn tại hai header Content-Length và Transfer-Encoding 
+trong cùng một yêu cầu.
+
 \section{Hỗ trợ thuật toán mã hóa yếu trong TLS 1.2}
 
-\subsection{Mức độ:}
+\subsection{Đánh giá rủi ro bảo mật: Thấp}
 
-\subsection{Điểm CVSS:}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Hinhve/Capture8.png}
+\caption{Cookie của người dùng không có cờ HttpOnly: true}
+\label{fig:Capture8}
+\end{figure}
 
 \subsection{Mô tả:}
 
@@ -495,6 +859,22 @@ hóa TLS 1.2 không còn được khuyến nghị theo các tiêu chuẩn bảo 
 
 
 \subsection{Vị trí:}
+
+\begin{longtable}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10.5cm}|}
+\caption{Danh sách đường dẫn được ghi nhận cho hỗ trợ thuật toán mã hóa yếu trong TLS 1.2}\\
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
+\hline
+\endhead
+
+1 & GET & https://lms.hust.edu.vn/ \\ \hline
+
+\end{longtable}
 
 \subsection{Phương án khắc phục:}
 

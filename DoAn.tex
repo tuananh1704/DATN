@@ -33,6 +33,9 @@
 \usepackage{tocbasic}
 
 \usepackage[font=small,labelfont=bf]{caption}
+% Center captions globally for tables and figures
+\captionsetup[table]{justification=centering, singlelinecheck=false}
+\captionsetup[figure]{justification=centering, singlelinecheck=false}
 
 \usepackage{listings}
 \usepackage{float}
@@ -161,6 +164,9 @@
 \setlength{\parskip}{6pt}
 %Lùi đầu dòng
 \setlength{\parindent}{15pt}
+
+% Tránh kéo giãn khoảng trắng theo chiều dọc để lấp đầy trang
+\raggedbottom
 
 
 
@@ -297,7 +303,7 @@
 \subfile{Chuong/5_Dong_gop_noi_bat}
 \newpage
 %\pagestyle{fancy} % Áp dụng header và footer
-\chapter{KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN} %Kết luận và hướng phát triển}
+\chapter{KẾT LUẬN} %Kết luận và hướng phát triển}
 \label{chapter:conclusion}
 \subfile{Chuong/6_Ket_luan}
 
@@ -332,8 +338,8 @@
     {\titlerule*[0.3pc]{.}\contentspage}         % filler-page-format, e.g dots
 \chapter{MỤC ĐÍCH CỦA CÁC NỘI DUNG KIỂM THỬ THEO TỪNG DANH MỤC}
 \subfile{Chuong/Phu_luc_A}
-\newpage
-\chapter{ĐẶC TẢ USE CASE}
-\subfile{Chuong/Phu_luc_B}
+% \newpage
+% \chapter{ĐẶC TẢ USE CASE}
+% \subfile{Chuong/Phu_luc_B}
 
 \end{document}
