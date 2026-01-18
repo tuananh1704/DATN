@@ -15,8 +15,8 @@ an toàn tổng thể của hệ thống lms.hust.edu.vn.
 
 Tổng cộng, đồ án đã tiến hành đánh giá bảo mật hệ thống dựa trên 10 hạng mục 
 kiểm thử theo hướng dẫn của OWASP Web Security Testing Guide. Kết quả cho thấy 
-8 lỗ hổng bảo mật đã được phát hiện, trong đó 3 lỗ hổng được đánh giá có mức 
-độ rủi ro thấp và 5 lỗ hổng được đánh giá có mức độ rủi ro cao. Bảng dưới đây 
+9 lỗ hổng bảo mật đã được phát hiện, trong đó 3 lỗ hổng được đánh giá có mức 
+độ rủi ro thấp và 6 lỗ hổng được đánh giá có mức độ rủi ro cao. Bảng dưới đây 
 trình bày thông tin tổng quan về các lỗ hổng bảo mật được phát hiện trong quá trình kiểm thử.
 
 \begin{longtable}{|>{\centering\arraybackslash}p{1cm}|>{\centering\arraybackslash}p{8cm}|>{\centering\arraybackslash}p{5cm}|}
@@ -32,13 +32,14 @@ trình bày thông tin tổng quan về các lỗ hổng bảo mật được ph
 \endhead
 
 1 & Lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất & Thấp \\ \hline
-2 & Chính sách mật khẩu yếu & Cao \\ \hline
-3 & Lỗ hổng Insecure Direct Object Reference (IDOR) & Cao \\ \hline
-4 & Cookie không có cờ HttpOnly & Thấp \\ \hline
-5 & Lỗ hổng Stored XSS (Cross-Site Scripting) & Cao \\ \hline
-6 & Lỗ hổng SQL Injection & Cao \\ \hline
-7 & Lỗ hổng HTTP Request smuggling & Cao \\ \hline
-8 & Hỗ trợ thuật toán mã hóa yếu trong TLS 1.2 & Thấp \\ \hline
+2 & Thiếu cơ chế bảo vệ chống tấn công Brute Force trong chức năng xác thực & Cao \\ \hline
+3 & Chính sách mật khẩu yếu & Cao \\ \hline
+4 & Lỗ hổng Insecure Direct Object Reference (IDOR) & Cao \\ \hline
+5 & Cookie không được cấu hình thuộc tính HttpOnly & Thấp \\ \hline
+6 & Lỗ hổng Stored XSS (Cross-Site Scripting) & Cao \\ \hline
+7 & Lỗ hổng SQL Injection & Cao \\ \hline
+8 & Lỗ hổng HTTP Request smuggling & Cao \\ \hline
+9 & Hỗ trợ thuật toán mã hóa yếu trong TLS 1.2 & Thấp \\ \hline
 \end{longtable}
 
 \section{Lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất}
@@ -54,27 +55,23 @@ Dựa trên phương pháp OWASP Risk Rating, lỗ hổng lưu trữ dữ liệu
 \end{figure}
 
 \subsection{Mô tả}
-Sau khi người dùng thực hiện đăng xuất khỏi ứng dụng web, khi sử dụng chức năng “Back” 
-(quay lại) của trình duyệt, các trang đã truy cập trước đó vẫn được hiển thị đầy đủ, bao 
-gồm cả các trang chứa thông tin nhạy cảm như tin nhắn hoặc điểm số, mặc dù người dùng hiện 
-tại đã không còn đăng nhập.
+Sau khi người dùng thực hiện đăng xuất khỏi ứng dụng web, khi sử dụng chức năng “Back” (quay lại) của trình duyệt, các trang đã truy cập trước đó vẫn được hiển thị đầy đủ, bao gồm cả những trang chứa thông tin nhạy cảm như tin nhắn hoặc kết quả học tập, mặc dù người dùng tại thời điểm đó không còn ở trạng thái đăng nhập.
 
-Trong khi đó, khi người dùng thực hiện các thao tác tương tác khác trên giao diện, 
-hệ thống lại điều hướng đúng về trang đăng nhập do yêu cầu xác thực. Hiện tượng này 
-cho thấy ứng dụng chỉ kiểm tra trạng thái xác thực khi có yêu cầu tải lại trang hoặc 
-phát sinh các yêu cầu AJAX mới, nhưng chưa kiểm soát hiệu quả việc hiển thị nội dung 
-thông qua lịch sử trình duyệt và cơ chế lưu trữ tạm (cache) phía client.
+Trong khi đó, khi người dùng thực hiện các thao tác tương tác khác trên giao diện, hệ thống lại điều hướng đúng về trang đăng nhập để yêu cầu xác thực. Hiện tượng này cho thấy ứng dụng chỉ kiểm tra trạng thái xác thực khi phát sinh yêu cầu tải lại trang hoặc các yêu cầu AJAX (Asynchronous JavaScript and XML) mới, nhưng chưa kiểm soát hiệu quả việc hiển thị nội dung thông qua lịch sử trình duyệt và cơ chế lưu trữ tạm (cache) phía client.
 
 \subsection{Tác động}
 
-Lỗ hổng này có thể bị kẻ tấn công lợi dụng để truy cập và xem lại các thông tin nhạy 
-cảm của người dùng trước đó, bao gồm thông tin cá nhân, kết quả học tập hoặc các dữ 
-liệu riêng tư khác, mà không cần thực hiện xác thực lại, đặc biệt trong trường hợp 
-thiết bị được sử dụng chung hoặc bị truy cập trái phép.
+Lỗ hổng này có thể bị kẻ tấn công lợi dụng để truy cập 
+và xem lại các thông tin nhạy cảm của người dùng trước
+ đó, bao gồm thông tin cá nhân, kết quả học tập hoặc 
+ các dữ liệu riêng tư khác, mà không cần thực hiện xác 
+ thực lại, đặc biệt trong trường hợp thiết bị được 
+ sử dụng chung hoặc bị truy cập trái phép. Điều này làm gia tăng nguy cơ rò rỉ 
+ thông tin và xâm phạm quyền riêng tư của người dùng.
 
 \subsection{Tái hiện}
 
-Đăng nhập tài khoản sau đó xem điểm cá nhân
+Đăng nhập vào tài khoản cá nhân sau đó tiến hành xem điểm cá nhân ở trên giao diện:
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\linewidth]{Hinhve/image1.png}
@@ -82,7 +79,8 @@ thiết bị được sử dụng chung hoặc bị truy cập trái phép.
 \label{fig:image2}
 \end{figure}
 
-Thực hiện đăng xuất khỏi hệ thống
+Thực hiện đăng xuất khỏi hệ thống. Quan sát phía trên bên phải giao diện
+có biểu tượng hình khóa cho thấy người dùng đã đăng xuất thành công:
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\linewidth]{Hinhve/image2.png}
@@ -90,7 +88,7 @@ Thực hiện đăng xuất khỏi hệ thống
 \label{fig:image2}
 \end{figure}
 
-Nhấn nút “back trên trình duyệt”, quan sát thấy vẫn trả về thông tin điểm cá nhân
+Nhấn nút “back trên trình duyệt”, quan sát thấy vẫn trả về thông tin điểm cá nhân của người dùng trước đó:
 
 \begin{figure}[H]
 \centering
@@ -120,11 +118,11 @@ Nhấn nút “back trên trình duyệt”, quan sát thấy vẫn trả về t
 
 \subsection{Phương án khắc phục}
 
-Ứng dụng cần được cấu hình để không lưu trữ bộ nhớ đệm đối với các trang chứa thông tin nhạy cảm bằng cách thiết lập các tiêu đề HTTP phù hợp trong phản hồi, chẳng hạn như Cache-Control: no-cache, no-store, must-revalidate, nhằm ngăn chặn việc hiển thị lại nội dung sau khi người dùng đã đăng xuất.
+Ứng dụng cần được cấu hình để không lưu trữ bộ nhớ đệm đối với các trang chứa thông tin nhạy cảm bằng cách thiết lập các tiêu đề HTTP phù hợp trong phản hồi, chẳng hạn như Cache-Control: no-cache, no-store, must-revalidate, nhằm ngăn chặn việc hiển thị lại nội dung sau khi người dùng đã đăng xuất, đồng thời hạn chế nguy cơ truy cập trái phép thông tin thông qua cơ chế lưu trữ tạm của trình duyệt.
 
-Bên cạnh đó, toàn bộ ứng dụng cần được triển khai trên giao thức HTTPS nhằm đảm bảo an toàn cho quá trình truyền dữ liệu, đồng thời hỗ trợ hiệu quả các cơ chế kiểm soát bộ nhớ đệm và các tiêu đề bảo mật liên quan.
+Bên cạnh đó, toàn bộ ứng dụng cần được triển khai trên giao thức HTTPS nhằm đảm bảo an toàn cho quá trình truyền dữ liệu giữa client và server. Việc sử dụng HTTPS cũng góp phần nâng cao hiệu quả của các cơ chế kiểm soát bộ nhớ đệm và việc áp dụng các tiêu đề bảo mật liên quan.
 
-Ngoài ra, phiên làm việc của người dùng cần được vô hiệu hóa đúng cách tại phía máy chủ khi thực hiện đăng xuất, đồng thời đảm bảo tất cả các yêu cầu truy cập sau khi đăng xuất đều được chuyển hướng về trang đăng nhập để yêu cầu xác thực lại.
+Ngoài ra, phiên làm việc của người dùng cần được vô hiệu hóa đúng cách tại phía máy chủ khi thực hiện đăng xuất. Đồng thời, hệ thống phải đảm bảo tất cả các yêu cầu truy cập phát sinh sau khi đăng xuất đều được kiểm tra xác thực và tự động chuyển hướng về trang đăng nhập để yêu cầu người dùng xác thực lại.
 
 \subsection{Tham chiếu:}
 OWASP Web Security Testing Guide - WSTG-ATHN-06: Testing for Browser Cache Weaknesses
@@ -155,13 +153,9 @@ pháp bảo vệ nào như khóa tài khoản, giới hạn tần suất, CAPTCH
 
 \subsection{Tác động}
 
-Việc không triển khai cơ chế bảo vệ chống tấn công brute force làm suy giảm đáng kể mức độ an 
-toàn của chức năng xác thực. Lỗ hổng này cho phép kẻ tấn công thực hiện số lượng lớn các lần thử 
-đăng nhập nhằm đoán mật khẩu, từ đó làm gia tăng nguy cơ chiếm quyền truy cập tài khoản người dùng. 
-Đặc biệt, đối với các tài khoản sử dụng mật khẩu yếu hoặc bị lộ thông tin xác thực từ các nguồn khác, 
-khả năng bị khai thác là rất cao. Ngoài ra, việc cho phép thực hiện số lượng lớn các yêu cầu 
-đăng nhập liên tiếp còn có thể bị lợi dụng để làm cạn kiệt tài nguyên hệ thống, dẫn đến suy giảm 
-tính sẵn sàng của dịch vụ và gây gián đoạn quá trình truy cập của người dùng hợp lệ.
+Việc không triển khai cơ chế bảo vệ chống tấn công brute force làm suy giảm đáng kể mức độ an toàn của chức năng xác thực. Lỗ hổng này cho phép kẻ tấn công thực hiện số lượng lớn các lần thử đăng nhập nhằm đoán mật khẩu, từ đó làm gia tăng nguy cơ chiếm quyền truy cập tài khoản người dùng. Đặc biệt, đối với các tài khoản sử dụng mật khẩu yếu hoặc bị lộ thông tin xác thực từ các nguồn khác, khả năng bị khai thác là rất cao và có thể dẫn đến hậu quả nghiêm trọng về bảo mật.
+
+Ngoài ra, việc cho phép thực hiện số lượng lớn các yêu cầu đăng nhập liên tiếp còn có thể bị lợi dụng để làm cạn kiệt tài nguyên hệ thống, dẫn đến suy giảm tính sẵn sàng của dịch vụ và gây gián đoạn quá trình truy cập của người dùng hợp lệ, ảnh hưởng đến trải nghiệm người dùng và độ ổn định chung của hệ thống.
 
 \subsection{Tái hiện}
 
@@ -195,13 +189,11 @@ Thực hiện đăng nhập sai nhiều lần mà không bị chặn, quan sát 
 
 \subsection{Phương án khắc phục}
 
-Để giảm thiểu nguy cơ tấn công brute force, hệ thống cần triển khai một hoặc 
-kết hợp nhiều biện pháp bảo vệ phù hợp. Cụ thể, cần áp dụng cơ chế khóa tài 
-khoản sau một số lần đăng nhập không thành công liên tiếp (thông thường từ 
-5 đến 10 lần) nhằm hạn chế số lượng thử đoán mật khẩu. Bên cạnh đó, hệ thống 
-nên triển khai cơ chế giới hạn tần suất đăng nhập dựa trên tài 
-khoản, địa chỉ IP hoặc thiết bị truy cập. Việc sử dụng CAPTCHA khi phát hiện 
-nhiều lần đăng nhập thất bại liên tiếp cũng góp phần ngăn chặn các công cụ tự động. Ngoài ra, có thể áp dụng cơ chế trì hoãn tăng dần giữa các lần thử đăng nhập để làm giảm hiệu quả của các cuộc tấn công brute force. Cuối cùng, hệ thống cần tăng cường giám sát và ghi log các hành vi đăng nhập bất thường nhằm phục vụ công tác phát hiện sớm và xử lý sự cố bảo mật.
+Để giảm thiểu nguy cơ tấn công brute force, hệ thống cần được thiết kế và triển khai một hoặc kết hợp nhiều biện pháp bảo vệ phù hợp nhằm nâng cao mức độ an toàn cho chức năng xác thực người dùng. Việc áp dụng đồng thời nhiều cơ chế bảo vệ giúp giảm đáng kể khả năng kẻ tấn công khai thác lỗ hổng thông qua các hình thức thử đoán mật khẩu tự động hoặc có chủ đích.
+
+Cụ thể, hệ thống cần áp dụng cơ chế khóa tạm thời hoặc vô hiệu hóa tài khoản sau một số lần đăng nhập không thành công liên tiếp (thông thường từ 5 đến 10 lần), qua đó hạn chế số lượng lần thử đoán mật khẩu. Bên cạnh đó, nên triển khai cơ chế giới hạn tần suất đăng nhập (rate limiting) dựa trên tài khoản, địa chỉ IP hoặc thiết bị truy cập để ngăn chặn các yêu cầu đăng nhập với tần suất bất thường. Việc sử dụng CAPTCHA khi phát hiện nhiều lần đăng nhập thất bại liên tiếp cũng góp phần hạn chế hiệu quả của các công cụ tự động thường được sử dụng trong các cuộc tấn công brute force.
+
+Ngoài ra, hệ thống có thể áp dụng cơ chế trì hoãn tăng dần giữa các lần thử đăng nhập nhằm kéo dài thời gian thực hiện tấn công và làm giảm khả năng khai thác thành công. Cuối cùng, cần tăng cường giám sát và ghi log các hành vi đăng nhập bất thường để phục vụ công tác phát hiện sớm, cảnh báo kịp thời và hỗ trợ quá trình phân tích, xử lý các sự cố bảo mật khi xảy ra.
 
 \subsection{Tham chiếu}
 
@@ -228,7 +220,7 @@ Việc áp dụng chính sách mật khẩu chưa đủ mạnh làm gia tăng kh
 
 \subsection{Tái hiện}
 
-Ứng dụng cho phép người dùng đăng nhập thành công với các mật khẩu có độ phức tạp thấp, chẳng hạn như mật khẩu dạng chuỗi số đơn giản (ví dụ như 12345678), cho thấy chính sách mật khẩu hiện tại chưa được thiết lập và thực thi chặt chẽ.
+Ứng dụng cho phép người dùng đăng nhập thành công với các mật khẩu có độ phức tạp thấp, chẳng hạn như mật khẩu dạng chuỗi số đơn giản (ví dụ như 12345678), cho thấy chính sách mật khẩu hiện tại chưa được thiết lập và thực thi chặt chẽ:
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\linewidth]{Hinhve/image4_1.png}
@@ -236,7 +228,7 @@ Việc áp dụng chính sách mật khẩu chưa đủ mạnh làm gia tăng kh
 \label{fig:image4_1}
 \end{figure}
 
-Chức năng thay đổi mật khẩu cho phép người dùng thiết lập mật khẩu mới trùng với mật khẩu đã sử dụng trước đó, cho thấy cơ chế quản lý lịch sử mật khẩu chưa được áp dụng hoặc chưa được kiểm soát hiệu quả.
+Chức năng thay đổi mật khẩu cho phép người dùng thiết lập mật khẩu mới trùng với mật khẩu đã sử dụng trước đó, cho thấy cơ chế quản lý lịch sử mật khẩu chưa được áp dụng hoặc chưa được kiểm soát hiệu quả:
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\linewidth]{Hinhve/image5_1.png}
@@ -290,21 +282,24 @@ Dựa trên phương pháp OWASP Risk Rating, lỗ hổng Insecure Direct Object
 
 \subsection{Mô tả}
 
-Chức năng Linked Logins tồn tại lỗ hổng Insecure Direct Object Reference (IDOR), cho phép người dùng thực hiện thao tác xóa liên kết tài khoản thông qua việc cung cấp trực tiếp giá trị linkedLoginId mà không có cơ chế xác thực hoặc kiểm tra quyền sở hữu tương ứng.
+Chức năng Linked Logins tồn tại lỗ hổng Insecure Direct Object Reference (IDOR), cho phép người dùng thực hiện thao tác xóa liên kết tài khoản thông qua việc cung cấp trực tiếp giá trị linkedLoginId mà không có cơ chế xác thực hoặc kiểm tra quyền sở hữu tương ứng. Lỗ hổng này phát sinh do hệ thống chưa triển khai đầy đủ các biện pháp kiểm soát truy cập ở phía máy chủ đối với các đối tượng dữ liệu nhạy cảm.
 
-Cụ thể, mỗi tài khoản trong hệ thống được gán một giá trị linkedLoginId duy nhất và API dùng để xóa liên kết tài khoản chỉ dựa trên tham số này để xác định đối tượng cần xử lý. Tuy nhiên, hệ thống không thực hiện kiểm tra để xác minh rằng linkedLoginId được gửi trong yêu cầu thuộc quyền sở hữu của người dùng đang đăng nhập.
+Cụ thể, mỗi tài khoản trong hệ thống được gán một giá trị linkedLoginId duy nhất và API dùng để xóa liên kết tài khoản chỉ dựa trên tham số này để xác định đối tượng cần xử lý. Tuy nhiên, trong quá trình tiếp nhận và xử lý yêu cầu, hệ thống không thực hiện kiểm tra để xác minh rằng giá trị linkedLoginId được gửi trong request thực sự thuộc quyền sở hữu của người dùng đang đăng nhập hoặc có quyền thao tác hợp lệ trên đối tượng đó.
 
-Do đó, người dùng có thể thao túng tham số linkedLoginId trong yêu cầu API nhằm hủy liên kết tài khoản của các người dùng khác trong hệ thống, dẫn đến nguy cơ truy cập trái phép và ảnh hưởng đến tính toàn vẹn của dữ liệu.
+Do đó, người dùng có thể thao túng tham số linkedLoginId trong yêu cầu API nhằm 
+hủy liên kết tài khoản của các người dùng khác trong hệ thống. Hành vi này có thể 
+dẫn đến nguy cơ truy cập trái phép, làm gián đoạn hoạt động liên kết tài khoản hợp 
+lệ.
 
 \subsection{Tác động}
 
-Lỗ hổng này chủ yếu ảnh hưởng đến tính sẵn sàng của hệ thống, do cho phép kẻ tấn công hủy liên kết tài khoản của người dùng khác, dẫn đến việc gián đoạn khả năng đăng nhập và truy cập dịch vụ. Ngoài ra, việc thay đổi trái phép trạng thái liên kết tài khoản cũng có thể gây ảnh hưởng gián tiếp đến tính toàn vẹn của dữ liệu người dùng.
+Lỗ hổng này chủ yếu ảnh hưởng đến tính sẵn sàng của hệ thống, do cho phép kẻ tấn công hủy liên kết tài khoản của người dùng khác, dẫn đến việc gián đoạn khả năng đăng nhập và truy cập dịch vụ trong một khoảng thời gian nhất định. Ngoài ra, việc thay đổi trái phép trạng thái liên kết tài khoản cũng có thể gây ảnh hưởng gián tiếp đến tính toàn vẹn của dữ liệu người dùng.
 
 \subsection{Tái hiện}
 
 POC: Dùng tài khoản Quoc.BA gỡ liên kết tài khoản của Anh.NT
 
-Tài khoản Quoc.BA có Session là kfns6djglskf8de2qi9sptptc5
+Tài khoản Quoc.BA có Session là kfns6djglskf8de2qi9sptptc5:
 
 \begin{figure}[H]
 \centering
@@ -313,7 +308,7 @@ Tài khoản Quoc.BA có Session là kfns6djglskf8de2qi9sptptc5
 \label{fig:image6_1}
 \end{figure}
 
-Tài khoản Anh.NT có Session là dm13idcbosk7inlnkutgimfmv6
+Tài khoản Anh.NT có Session là dm13idcbosk7inlnkutgimfmv6:
 
 \begin{figure}[H]
 \centering
@@ -322,7 +317,7 @@ Tài khoản Anh.NT có Session là dm13idcbosk7inlnkutgimfmv6
 \label{fig:image7_1}
 \end{figure}
 
-Tài khoản Anh.NT có Linkedloginid=28004
+Tài khoản Anh.NT có Linkedloginid=28004:
 
 \begin{figure}[H]
 \centering
@@ -331,7 +326,7 @@ Tài khoản Anh.NT có Linkedloginid=28004
 \label{fig:image8_1}
 \end{figure}
 
-Sử dụng tài khoản Quoc.BA gỡ tài khoản liên kết của tài khoản Anh.NT bằng cách gửi yêu cầu xóa liên kết có kèm id trong tham số
+Sử dụng tài khoản Quoc.BA gỡ tài khoản liên kết của tài khoản Anh.NT bằng cách gửi yêu cầu xóa liên kết có kèm id trong tham số:
 
 \begin{figure}[H]
 \centering
@@ -340,7 +335,7 @@ Sử dụng tài khoản Quoc.BA gỡ tài khoản liên kết của tài khoả
 \label{fig:image9}
 \end{figure}
 
-Kiểm tra bên tài khoản Anh.NT thì liên kết đã bị xóa
+Kiểm tra bên tài khoản Anh.NT thì liên kết đã bị xóa:
 
 \begin{figure}[H]
 \centering
@@ -369,9 +364,9 @@ Kiểm tra bên tài khoản Anh.NT thì liên kết đã bị xóa
 
 \subsection{Phương án khắc phục}
 
-Hệ thống cần thực hiện xác thực quyền sở hữu đối tượng trước khi cho phép thao tác. Cụ thể, khi xử lý yêu cầu xóa liên kết tài khoản, máy chủ phải kiểm tra và đảm bảo rằng giá trị linkedLoginId được gửi trong yêu cầu thực sự thuộc quyền sở hữu của người dùng đang đăng nhập.
+Để khắc phục lỗ hổng Insecure Direct Object Reference (IDOR), hệ thống cần thực hiện kiểm soát truy cập chặt chẽ ở phía máy chủ bằng cách xác thực quyền sở hữu đối tượng trước khi cho phép thực hiện bất kỳ thao tác nào liên quan đến dữ liệu người dùng. Cụ thể, khi xử lý yêu cầu xóa liên kết tài khoản, máy chủ phải kiểm tra và đảm bảo rằng giá trị linkedLoginId được gửi trong yêu cầu thực sự thuộc quyền sở hữu của người dùng đang đăng nhập, thay vì chỉ dựa vào tham số được cung cấp từ phía client. Việc kiểm tra này cần được thực hiện nhất quán đối với tất cả các API liên quan đến thao tác trên đối tượng.
 
-Bên cạnh đó, hệ thống nên sử dụng các định danh nội bộ khó đoán, chẳng hạn như UUID hoặc các giá trị được băm, thay vì sử dụng các định danh dạng tăng dần. Việc này giúp giảm khả năng suy đoán hoặc liệt kê các định danh hợp lệ, từ đó hạn chế nguy cơ khai thác lỗ hổng IDOR.
+Bên cạnh đó, hệ thống nên sử dụng các định danh nội bộ khó đoán, chẳng hạn như UUID hoặc các giá trị đã được băm, thay vì sử dụng các định danh dạng tăng dần hoặc có thể suy đoán. Việc áp dụng các định danh này giúp giảm khả năng kẻ tấn công thực hiện liệt kê hoặc đoán các giá trị hợp lệ, từ đó hạn chế đáng kể nguy cơ khai thác lỗ hổng IDOR. Ngoài ra, cần kết hợp cơ chế kiểm soát truy cập dựa trên người dùng hoặc vai trò để đảm bảo mỗi thao tác chỉ được thực hiện bởi các chủ thể có quyền hợp lệ.
 
 \subsection{Tham chiếu:}
 OWASP Web Security Testing Guide - WSTG-ATHZ-04: Testing for Insecure Direct Object References
@@ -380,12 +375,11 @@ OWASP Web Security Testing Guide - WSTG-ATHZ-04: Testing for Insecure Direct Obj
 
 \subsection{Đánh giá rủi ro bảo mật: Thấp}
 
-Dựa trên phương pháp OWASP Risk Rating, lỗ hổng cookie 
-không được cấu hình thuộc tính HttpOnly được đánh giá với hệ số khả 
-năng khai thác là 4.125 và hệ số tác động là 1.00. Kết quả cho thấy 
-khả năng bị khai thác ở mức trung bình trong khi mức độ tác động 
-là thấp, do đó mức độ rủi ro tổng thể của lỗ hổng được xác định ở 
-mức Thấp.
+Dựa trên phương pháp OWASP Risk Rating, lỗ hổng cookie không được cấu hình thuộc tính HttpOnly được đánh giá với hệ số khả năng khai thác là 4.125 và hệ số tác động là 1.00. Kết quả này cho thấy khả năng bị khai thác của lỗ hổng ở mức trung bình, trong khi mức độ tác động được đánh giá là thấp, do dữ liệu bị ảnh hưởng chủ yếu giới hạn trong phạm vi thông tin phiên.
+
+Trên cơ sở đó, mức độ rủi ro tổng thể của lỗ hổng được xác định ở mức 
+Thấp theo thang đánh giá của OWASP. Tuy nhiên, lỗ hổng này vẫn cần được 
+lưu ý, đặc biệt khi kết hợp với các lỗ hổng khác như Cross-Site Scripting (XSS), có thể làm gia tăng mức độ ảnh hưởng đối với an toàn thông tin của người dùng.
 
 \begin{figure}[H]
 \centering
@@ -418,7 +412,7 @@ Cookie được sử dụng để xác thực người dùng nhưng chưa đư�
 \subsection{Vị trí}
 
 \begin{longtable}{|>{\centering\arraybackslash}p{0.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{10.5cm}|}
-\caption{Danh sách đường dẫn được ghi nhận cho Cookie không được cấu hình thuộc tính HttpOnly}\\
+\caption{Danh sách đường dẫn được ghi nhận cho Cookie không có cờ HttpOnly}\\
 \hline
 \textbf{\#} & \textbf{Phương thức} & \textbf{Đường dẫn} \\
 \hline
@@ -437,7 +431,7 @@ Cookie được sử dụng để xác thực người dùng nhưng chưa đư�
 
 Cookie cần được thiết lập đầy đủ các thuộc tính bảo mật, bao gồm HttpOnly để ngăn truy cập từ mã 
 phía client, Secure để đảm bảo cookie chỉ được truyền qua kết nối HTTPS, và SameSite nhằm hạn chế 
-nguy cơ tấn công Cross-Site Request Forgery.
+nguy cơ tấn công CSRF.
 
 \subsection{Tham chiếu:}
 OWASP Web Security Testing Guide - WSTG-SESS-02: Testing for Cookies Attributes
@@ -465,16 +459,15 @@ toàn trước khi được lưu trữ và hiển thị lại trên trình duy�
 
 \subsection{Tác động}
 
-Lỗ hổng Stored XSS cho phép kẻ tấn công thực thi mã JavaScript tùy ý trong trình duyệt của người dùng khi họ truy cập trang lịch chứa nội dung độc hại.
-Do cookie phiên của ứng dụng không được cấu hình thuộc tính HttpOnly, kẻ tấn 
-công có thể trực tiếp đánh cắp cookie người dùng thông qua JavaScript và gửi 
-ra ngoài, từ đó chiếm quyền truy cập tài khoản.
+Lỗ hổng Stored Cross-Site Scripting (XSS) cho phép kẻ tấn công chèn và lưu trữ mã JavaScript độc hại trên hệ thống, từ đó thực thi mã này trong trình duyệt của người dùng khi họ truy cập vào trang lịch chứa nội dung bị chèn. Do payload được lưu trữ phía máy chủ, mọi người dùng truy cập vào trang bị ảnh hưởng đều có nguy cơ trở thành nạn nhân mà không cần tương tác thêm.
+
+Trong trường hợp này, cookie phiên của ứng dụng không được cấu hình thuộc tính HttpOnly, khiến dữ liệu xác thực có thể bị truy cập trực tiếp thông qua JavaScript phía client. Kẻ tấn công có thể lợi dụng lỗ hổng này để đánh cắp cookie phiên và gửi ra ngoài máy chủ do chúng kiểm soát, từ đó chiếm quyền truy cập tài khoản người dùng. Hậu quả có thể dẫn đến việc lộ thông tin cá nhân, thực hiện các hành vi trái phép dưới danh nghĩa nạn nhân và ảnh hưởng nghiêm trọng đến an toàn thông tin của hệ thống.
 
 \subsection{Tái hiện}
 
-Truy cập trang Lịch để tạo sự kiện: https://lms.hust.edu.vn/calendar/view.php
+Truy cập trang Lịch để tạo sự kiện: https://lms.hust.edu.vn/calendar/view.php.
 
-Chọn một ngày và Tạo sự kiện mới.
+Chọn một ngày và Tạo sự kiện mới:
 
 \begin{figure}[H]
 \centering
@@ -483,9 +476,8 @@ Chọn một ngày và Tạo sự kiện mới.
 \label{fig:image12}
 \end{figure}
 
-Chèn Media: Trong phần Description (Mô tả) của sự kiện, chọn Insert Video.
-
-Chọn tùy chọn chèn Audio/Video:
+Chèn Media: Trong phần Description (Mô tả) của lịch sự kiện, chọn Insert Video.
+Sau đó chọn tùy chọn chèn Audio/Video:
 
 \begin{figure}[H]
 \centering
@@ -494,13 +486,13 @@ Chọn tùy chọn chèn Audio/Video:
 \label{fig:image13_1}
 \end{figure}
 
-Tìm đến phần Subtitles and Captions. Trong trường Label chèn payload XSS:
+Tìm đến phần Subtitles and Captions. Tìm đến trường Label để chèn payload Cross-Site Scripting:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\linewidth]{Hinhve/image14.png}
+\includegraphics[width=1\linewidth]{Hinhve/image14_1.png}
 \caption{Chọn tùy chọn chèn Audio/Video}
-\label{fig:image14}
+\label{fig:image14_1}
 \end{figure}
 
 Ví dụ payload đã chèn để lấy cookie ra webhook:
@@ -552,16 +544,13 @@ Truy cập vào webhook, quan sát đã lấy được cookie:
 
 \subsection{Phương án khắc phục}
 
-Hệ thống cần kiểm tra và làm sạch toàn bộ dữ liệu đầu vào do người dùng cung cấp, 
-loại bỏ các thẻ và 
-thuộc tính nguy hiểm có khả năng thực thi mã JavaScript.
+Hệ thống cần thực hiện kiểm tra và làm sạch toàn bộ dữ liệu đầu vào do người dùng cung cấp trước khi lưu trữ hoặc xử lý, nhằm loại bỏ các thẻ HTML, thuộc tính và cú pháp nguy hiểm có khả năng thực thi mã JavaScript. Việc kiểm tra dữ liệu đầu vào cần được triển khai nhất quán tại phía máy chủ, thay vì chỉ dựa vào cơ chế kiểm soát phía client, để đảm bảo không thể bị bỏ qua hoặc thao túng. Đồng thời, nên áp dụng các danh sách cho phép (whitelist) đối với các thẻ và định dạng hợp lệ nhằm giảm thiểu nguy cơ chèn mã độc.
 
-Dữ liệu hiển thị trên trình duyệt phải được mã hóa đầu ra theo ngữ cảnh để 
-đảm bảo nội dung không bị diễn giải và thực thi dưới dạng mã HTML hoặc 
-JavaScript.
+Bên cạnh đó, dữ liệu được hiển thị trên trình duyệt cần được mã hóa đầu ra (output encoding) theo đúng ngữ cảnh sử dụng, chẳng hạn như HTML, JavaScript, URL hoặc thuộc tính HTML, để đảm bảo nội dung không bị diễn giải và thực thi dưới dạng mã lệnh. Việc mã hóa đầu ra giúp ngăn chặn các payload XSS ngay cả trong trường hợp dữ liệu độc hại đã được lưu trữ trong hệ thống.
 
-Cookie phiên cần được cấu hình đầy đủ các thuộc tính bảo mật như HttpOnly, 
-Secure và SameSite để ngăn chặn việc đánh cắp cookie thông qua XSS.
+Ngoài ra, cookie phiên cần được cấu hình đầy đủ các thuộc tính bảo mật như HttpOnly, Secure và SameSite để hạn chế khả năng truy cập cookie từ JavaScript phía client và ngăn chặn việc gửi cookie qua các kết nối không an toàn. Điều này giúp giảm thiểu tác động của lỗ hổng XSS trong trường hợp kẻ tấn công chèn được mã độc thành công.
+
+Bên cạnh các biện pháp trên, cần thường xuyên rà soát, kiểm thử bảo mật và cập nhật các thư viện, framework đang sử dụng để đảm bảo tuân thủ các khuyến nghị bảo mật hiện hành.
 
 \subsection{Tham chiếu:}
 OWASP Web Security Testing Guide - WSTG-INPV-02: Testing for Stored Cross Site Scripting
@@ -588,15 +577,9 @@ thay đổi cú pháp truy vấn.
 
 \subsection{Tác động}
 
-:ỗ hổng SQL Injection cho phép kẻ tấn công xác định và liệt kê tên các bảng trong cơ sở 
-dữ liệu thông qua kỹ thuật suy luận. Mặc dù chưa truy xuất trực tiếp 
-nội dung dữ liệu, việc lộ cấu trúc CSDL đã cung cấp thông tin quan trọng về cách tổ chức 
-và các thành phần bên trong hệ thống.
+Lỗ hổng SQL Injection cho phép kẻ tấn công xác định và liệt kê tên các bảng trong cơ sở dữ liệu thông qua kỹ thuật suy luận. Mặc dù tại thời điểm kiểm thử chưa thể truy xuất trực tiếp nội dung dữ liệu, việc lộ cấu trúc cơ sở dữ liệu đã cung cấp thông tin quan trọng về cách tổ chức, mối quan hệ giữa các bảng và các thành phần bên trong hệ thống.
 
-Thông tin này có thể được sử dụng làm bước đệm cho các kịch bản tấn công nâng cao hơn 
-trong trường hợp lỗ hổng không được khắc phục, chẳng hạn như mở rộng khai thác để đọc dữ 
-liệu, kết hợp với các lỗ hổng khác, hoặc hỗ trợ phân tích sâu kiến trúc hệ thống. Điều này 
-tiềm ẩn rủi ro đối với tính bảo mật tổng thể của ứng dụng và cần được xử lý sớm.
+Những thông tin này có thể được sử dụng làm bước đệm cho các kịch bản tấn công nâng cao hơn trong trường hợp lỗ hổng không được khắc phục kịp thời, chẳng hạn như mở rộng khai thác để đọc dữ liệu nhạy cảm, kết hợp với các lỗ hổng khác hoặc hỗ trợ quá trình phân tích sâu kiến trúc hệ thống. Do đó, lỗ hổng này tiềm ẩn rủi ro đối với tính bảo mật tổng thể của ứng dụng và cần được ưu tiên xử lý sớm nhằm hạn chế khả năng bị khai thác trong thực tế.
 
 \subsection{Tái hiện}
 
@@ -783,16 +766,7 @@ sẽ gửi request ngay sau)
 \label{fig:image34}
 \end{figure}
 
-Khi request độc hại được gửi đến, Front-End server xử lý nội dung dựa 
-trên header Content-Length và chuyển toàn bộ phần body sang Back-End 
-server. Trong khi đó, Back-End server lại phân tích request theo header 
-Transfer-Encoding: chunked và dừng xử lý tại ký tự kết thúc chuỗi chunk 
-(0). Phần dữ liệu nằm sau ký tự này, bao gồm request gọi tới đường dẫn 
-/404, không bị loại bỏ mà được giữ lại trong bộ đệm của server. Khi một 
-request hợp lệ khác được gửi ngay sau đó trên cùng kết nối TCP, phần dữ 
-liệu bị giữ lại sẽ được ghép vào đầu request mới và được server xử lý, 
-dẫn đến phản hồi lỗi 404 Not Found, qua đó xác nhận thành công lỗ hổng 
-HTTP Request Smuggling loại CL-TE.
+Khi request độc hại được gửi đến, Front-End server xử lý nội dung dựa trên header Content-Length và chuyển phần body sang Back-End server. Trong khi đó, Back-End server lại phân tích request theo header Transfer-Encoding: chunked và dừng xử lý tại ký tự kết thúc chunk (0), khiến phần dữ liệu phía sau không bị loại bỏ mà được giữ lại trong bộ đệm. Khi một request hợp lệ khác được gửi trên cùng kết nối TCP, dữ liệu này sẽ được ghép vào request mới và tiếp tục được xử lý, dẫn đến phản hồi lỗi 404 Not Found, qua đó xác nhận sự tồn tại của lỗ hổng HTTP Request Smuggling loại CL-TE.
 
 \begin{figure}[H]
 \centering
@@ -801,11 +775,9 @@ HTTP Request Smuggling loại CL-TE.
 \label{fig:image36}
 \end{figure}
 
-Tiếp tục khai thác sâu hơn, lỗ hổng HTTP Request Smuggling cho phép thu thập 
-thông tin phiên làm việc của request được gửi ngay sau đó. Để thực hiện điều này, cần
-xác định một request sử dụng phương thức POST và có khả năng ghi nhận dữ liệu đã được xác 
-định, và chức năng cập nhật thông tin cá nhân người dùng đáp ứng được yêu cầu này.
+Tiếp tục khai thác sâu hơn, lỗ hổng HTTP Request Smuggling cho phép kẻ tấn công thu thập thông tin phiên làm việc của request hợp lệ được gửi ngay sau request độc hại trên cùng một kết nối TCP. Thông qua việc kiểm soát cách Front-End và Back-End server diễn giải request, dữ liệu của request tiếp theo có thể bị ghép và xử lý ngoài dự kiến, từ đó làm lộ các thông tin nhạy cảm liên quan đến phiên người dùng.
 
+Để thực hiện kịch bản khai thác này, cần xác định một request sử dụng phương thức POST và có khả năng ghi nhận hoặc lưu trữ dữ liệu do người dùng cung cấp. Trong quá trình kiểm thử, chức năng cập nhật thông tin cá nhân của người dùng đáp ứng được yêu cầu này do tiếp nhận dữ liệu đầu vào và xử lý trực tiếp ở phía máy chủ. Việc lợi dụng chức năng này cho phép kẻ tấn công thu thập hoặc thao túng dữ liệu của request kế tiếp, qua đó mở rộng phạm vi ảnh hưởng của lỗ hổng HTTP Request Smuggling:
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\linewidth]{Hinhve/image37.png}
@@ -823,9 +795,10 @@ Sau khi thực hiện cập nhật thông tin cá nhân, quan sát Burp Suite b�
 \label{fig:image38}
 \end{figure}
 
-Payload được đưa xuống cuối nội dung của request để khi request 
-tiếp theo bị nối vào, dữ liệu của request này sẽ được hệ thống lưu 
-trực tiếp vào trường Description.
+Payload được đưa xuống cuối nội dung của yêu cầu để khi yêu cầu 
+tiếp theo gửi đến bị nối vào, dữ liệu của request này sẽ được hệ thống lưu 
+và hiên thị 
+trực tiếp trong trường Description (Mô tả):
 
 \begin{figure}[H]
 \centering
@@ -834,7 +807,7 @@ trực tiếp vào trường Description.
 \label{fig:image39}
 \end{figure}
 
-Nối request này vào request độc hại ban đầu.
+Nối request này vào request độc hại ban đầu:
 
 \begin{figure}[H]
 \centering
@@ -858,7 +831,7 @@ Description trên giao diện của kẻ tấn công.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\linewidth]{Hinhve/image43.png}
+\includegraphics[width=1\linewidth]{Hinhve/image43-1.png}
 \caption{Request của nạn nhân bị nối vào và hiển thị trên giao diện kẻ tấn công}
 \label{fig:image43}
 \end{figure}
@@ -886,11 +859,7 @@ Description trên giao diện của kẻ tấn công.
 
 \subsection{Phương án khắc phục}
 
-Để khắc phục lỗ hổng HTTP Request Smuggling, hệ thống cần đảm bảo sự thống 
-nhất trong cách xử lý HTTP request giữa Front-End và Back-End server. Server 
-phải được cấu hình để chỉ chấp nhận một cơ chế xác định độ dài request và 
-không cho phép đồng thời tồn tại hai header Content-Length và Transfer-Encoding 
-trong cùng một yêu cầu.
+Để khắc phục lỗ hổng HTTP Request Smuggling, hệ thống cần đảm bảo sự thống nhất trong cách xử lý HTTP request giữa Front-End và Back-End server. Server phải được cấu hình để chỉ chấp nhận một cơ chế xác định độ dài request và không cho phép đồng thời tồn tại hai header Content-Length và Transfer-Encoding trong cùng một yêu cầu, nhằm tránh sự khác biệt trong quá trình phân tích request. Ngoài ra, các request có cấu trúc bất thường hoặc không tuân thủ chuẩn HTTP cần được từ chối ngay từ phía máy chủ để giảm thiểu nguy cơ bị khai thác.
 
 \subsection{Tham chiếu:} 
 OWASP Web Security Testing Guide - WSTG-INPV-15: Testing for HTTP Splitting Smuggling
@@ -915,15 +884,9 @@ HTTPS giữa máy khách và máy chủ.
 
 \subsection{Tác động}
 
-Việc sử dụng các bộ mã hóa TLS yếu có thể làm suy giảm mức độ an toàn 
-của kênh truyền dữ liệu. Trong một số điều kiện nhất định, kẻ tấn công 
-có khả năng phân tích hoặc giải mã dữ liệu truyền tải, từ đó làm tăng 
-nguy cơ rò rỉ thông tin nhạy cảm như thông tin xác thực, dữ liệu người 
-dùng hoặc token phiên làm việc. Bên cạnh đó, cấu hình này khiến cơ chế 
-bảo mật TLS của hệ thống không đáp ứng các khuyến nghị và tiêu chuẩn bảo 
-mật hiện hành (ví dụ: OWASP, Mozilla TLS Guide), đồng thời có thể ảnh 
-hưởng đến yêu cầu tuân thủ các tiêu chuẩn an toàn thông tin trong môi 
-trường triển khai thực tế.
+Việc sử dụng các bộ mã hóa TLS yếu làm giảm mức độ an toàn của kênh truyền dữ liệu giữa client và server. Trong một số trường hợp, kẻ tấn công có thể lợi dụng các điểm yếu của thuật toán mã hóa để phân tích hoặc giải mã dữ liệu truyền tải, từ đó làm tăng nguy cơ rò rỉ các thông tin nhạy cảm như thông tin xác thực, dữ liệu người dùng hoặc token phiên làm việc.
+
+Ngoài ra, cấu hình TLS không an toàn còn có thể tạo điều kiện cho các hình thức tấn công trung gian (Man-in-the-Middle), đặc biệt khi hệ thống được truy cập từ các môi trường mạng công cộng. Bên cạnh đó, việc sử dụng các bộ mã hóa yếu khiến cơ chế bảo mật TLS của hệ thống không đáp ứng các khuyến nghị và tiêu chuẩn bảo mật hiện hành (ví dụ như OWASP hoặc Mozilla TLS Guide), từ đó có thể ảnh hưởng đến yêu cầu tuân thủ các tiêu chuẩn an toàn thông tin trong môi trường triển khai thực tế.
 
 \subsection{Tái hiện}
 

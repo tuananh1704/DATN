@@ -6,8 +6,8 @@
 
 \section{Thu thập thông tin hệ thống}
 
-Giai đoạn Thu thập thông tin được thực hiện nhằm thu thập một cách có hệ thống 
-và toàn diện các dữ liệu liên quan đến hệ thống mục tiêu, bao gồm các công nghệ 
+Giai đoạn Thu thập thông tin được thực hiện nhằm thu thập một cách toàn diện về
+ các dữ liệu liên quan đến hệ thống mục tiêu, bao gồm các công nghệ 
 và nền tảng được sử dụng, các endpoint có thể truy cập từ bên ngoài, sơ đồ chức 
 năng trang web cũng như 
 các thành phần tiềm ẩn nguy cơ gây ra rủi ro bảo mật.
@@ -70,12 +70,14 @@ WSTG-INFO-02 \\
 
 \subsection{Sơ đồ chức năng trang web}
 
-Việc phát hiện cấu trúc sitemap của hệ thống là một trong những kết quả thu được trong quá 
-trình thực hiện các hạng mục kiểm thử thuộc nhóm Information Gathering theo khung hướng dẫn 
-OWASP Web Security Testing Guide. Trên cơ sở kinh nghiệm sử dụng ứng dụng LMS với vai trò người 
-dùng sinh viên, kết hợp với sự hỗ trợ của các công cụ quét tự động, đồ án xác định được cấu 
-trúc sitemap của hệ thống mục tiêu, được trình bày chi tiết ở phần dưới đây.
-
+Việc phát hiện cấu trúc sitemap của hệ thống là một trong những 
+kết quả thu được trong quá trình thực hiện các hạng mục kiểm thử 
+thuộc nhóm Information Gathering theo khung hướng dẫn OWASP 
+Web Security Testing Guide. Trên cơ sở kinh nghiệm sử dụng ứng 
+dụng LMS với vai trò người dùng sinh viên, kết hợp với sự hỗ 
+trợ của các công cụ quét tự động, đồ án xác định được cấu trúc 
+sitemap của hệ thống mục tiêu, được trình bày chi tiết ở phần 
+dưới đây.
 
 \begin{figure}[H]
 \centering
@@ -84,16 +86,9 @@ trúc sitemap của hệ thống mục tiêu, được trình bày chi tiết �
 \label{fig:Sitemap_1}
 \end{figure}
 
-Từ sơ đồ tổng quan các chức năng chính của hệ thống LMS dành cho sinh viên được 
-trình bày ở Hình 3.1, có thể thấy cấu trúc website được tổ chức theo nhiều nhóm 
-chức năng khác nhau, phục vụ các nhu cầu học tập, quản lý học phần và tương tác 
-của người dùng. Tuy nhiên, sơ đồ tổng quan chỉ phản ánh mối quan hệ và phạm vi chức năng ở mức khái quát, 
-chưa thể hiện đầy đủ các chức năng cụ thể mà từng trang trong hệ thống cung cấp.
+Từ sơ đồ tổng quan các chức năng chính của hệ thống LMS dành cho sinh viên được trình bày ở Hình~\ref{fig:Sitemap_1}, có thể thấy cấu trúc website được tổ chức theo nhiều nhóm chức năng khác nhau, phục vụ các nhu cầu học tập, quản lý học phần và tương tác của người dùng. Tuy nhiên, sơ đồ tổng quan chỉ phản ánh mối quan hệ và phạm vi chức năng ở mức khái quát, chưa thể hiện đầy đủ các chức năng cụ thể mà từng trang trong hệ thống cung cấp, cũng như cách thức người dùng tương tác với từng thành phần chức năng trong hệ thống.
 
-Do đó, để làm rõ hơn phạm vi và nội dung của từng chức năng, bảng dưới đây trình bày chi tiết các trang 
-chính của hệ thống LMS, kèm theo mô tả và các chức năng tương ứng mà người dùng có thể thực hiện trên mỗi 
-trang. Việc phân tích chi tiết này đóng vai trò quan trọng trong việc xác định các điểm cần kiểm thử và xây 
-dựng các kịch bản đánh giá an toàn bảo mật trong các bước tiếp theo của đồ án.
+Do đó, để làm rõ hơn phạm vi và nội dung của từng chức năng, bảng dưới đây trình bày chi tiết các trang chính của hệ thống LMS, kèm theo mô tả và các chức năng tương ứng mà người dùng có thể thực hiện trên mỗi trang. Việc phân tích chi tiết này đóng vai trò quan trọng trong việc xác định các điểm cần kiểm thử và xây dựng các kịch bản đánh giá an toàn bảo mật trong các bước tiếp theo của đồ án.
 
 \begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{7cm}|}
 
@@ -305,18 +300,18 @@ Thoát
 
 \section{Kiểm thử cấu hình và triển khai}
 
-Trong phần này, hoạt động kiểm thử cấu hình và triển khai hệ thống được thực hiện dựa trên 
-khung hướng dẫn OWASP Web Security Testing Guide (WSTG) nhằm đánh giá mức độ an toàn của 
-các thiết lập hệ thống, nền tảng ứng dụng và các cơ chế bảo vệ ở tầng hạ tầng. Nội dung kiểm 
-thử tập trung vào việc rà soát các cấu hình có nguy cơ làm lộ thông tin nhạy cảm, các chính 
-sách bảo mật HTTP, cơ chế phân quyền truy cập tài nguyên, cũng như các sai sót trong quá 
-trình triển khai có thể dẫn đến rủi ro mất an toàn thông tin.
+Trong phần này, hoạt động kiểm thử cấu hình và triển khai hệ thống 
+được thực hiện dựa trên khung hướng dẫn OWASP Web Security Testing Guide 
+(WSTG) nhằm đánh giá toàn 
+diện mức độ an toàn của các thiết lập hệ thống, nền tảng ứng dụng và 
+các cơ chế bảo vệ ở tầng hạ tầng. Nội dung kiểm thử tập trung vào việc rà soát các cấu hình tiềm ẩn nguy cơ làm lộ thông tin nhạy cảm, các chính sách bảo mật HTTP, cơ chế kiểm soát và phân quyền truy cập tài nguyên, cũng như các sai sót trong quá trình triển khai có thể bị kẻ tấn công lợi dụng, từ đó gây ra rủi ro mất an toàn thông tin cho hệ thống.
 
-Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-CONF, qua đó 
-phản ánh các cấu hình đã đáp ứng yêu cầu an toàn bảo mật, các trường hợp chưa đạt, cũng như 
-những hạng mục không thể tiến hành kiểm thử do giới hạn về quyền truy cập trong phạm vi đánh 
-giá. Các kết quả này được sử dụng làm cơ sở cho việc nhận diện các vấn đề cấu hình tồn tại và 
-đề xuất các biện pháp khắc phục phù hợp trong các phần tiếp theo của đồ án.
+Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục 
+thuộc nhóm WSTG-CONF, qua đó phản ánh mức độ tuân thủ các yêu 
+cầu an toàn bảo mật của hệ thống trong công tác quản lý cấu hình 
+và triển khai. Các kết quả này đồng thời chỉ ra những cơ chế đã được 
+triển khai hiệu quả cũng như các vấn đề còn tồn tại cần được 
+lưu ý và khắc phục.
 
 \begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{5cm}|>{\centering\arraybackslash}p{7cm}|}
 
@@ -383,9 +378,7 @@ trình đăng ký và cấp tài khoản, khả năng liệt kê hoặc suy đo�
 đặt tên người dùng. Việc đánh giá các hạng mục này giúp xác định những điểm yếu có thể bị lợi 
 dụng để thu thập thông tin người dùng hoặc làm tiền đề cho các hình thức tấn công tiếp theo.
 
-Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-IDNT, qua đó 
-thể hiện các cơ chế quản lý định danh đã đáp ứng yêu cầu an toàn bảo mật cũng như các vấn đề 
-còn tồn tại cần được lưu ý và khắc phục.
+Bảng dưới đây Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-IDNT, qua đó đánh giá mức độ đáp ứng của các cơ chế quản lý định danh đối với yêu cầu an toàn bảo mật, đồng thời chỉ ra những vấn đề còn tồn tại cần được lưu ý và khắc phục.
 
 \begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{5cm}|>{\centering\arraybackslash}p{7cm}|}
 \caption{Kết quả kiểm thử quản lý định danh}\\
@@ -537,15 +530,11 @@ Kiểm thử các điểm yếu OAuth &
 
 \section{Kiểm thử quản lý phiên}
 
-Trong phần này, hoạt động kiểm thử quản lý phiên được thực hiện nhằm đánh giá mức độ an toàn 
-của các cơ chế quản lý phiên làm việc của người dùng trên hệ thống. Nội dung kiểm thử tập 
-trung vào việc phân tích cách thức tạo và quản lý phiên, cấu hình và thuộc tính của cookie, 
-cơ chế kết thúc và hết hạn phiên, cũng như các nguy cơ liên quan đến chiếm đoạt hoặc lạm dụng 
-phiên làm việc.
+Trong phần này, hoạt động kiểm thử quản lý phiên được thực hiện nhằm đánh giá mức 
+độ an toàn của các cơ chế quản lý phiên làm việc của người dùng trên hệ thống. Nội 
+dung kiểm thử tập trung vào việc phân tích cách thức tạo và quản lý phiên, cấu hình và thuộc tính của cookie, cơ chế kết thúc và hết hạn phiên, cũng như các nguy cơ liên quan đến chiếm đoạt hoặc lạm dụng phiên làm việc, từ đó xác định mức độ tuân thủ các khuyến nghị bảo mật hiện hành.
 
-Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-SESS, qua đó 
-phản ánh các cơ chế quản lý phiên đã đáp ứng yêu cầu an toàn bảo mật, các vấn đề cấu hình 
-chưa phù hợp và những rủi ro tiềm ẩn cần được xem xét và khắc phục trong các phần tiếp theo.
+Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-SESS, qua đó phản ánh các cơ chế quản lý phiên đã đáp ứng yêu cầu an toàn bảo mật, các vấn đề cấu hình chưa phù hợp và những rủi ro tiềm ẩn cần được xem xét và khắc phục trong các phần tiếp theo.
 
 \begin{longtable}{|>{\centering\arraybackslash}p{2.2cm}|>{\centering\arraybackslash}p{5cm}|>{\centering\arraybackslash}p{7cm}|}
 \caption{Kết quả kiểm thử quản lý phiên}\\
@@ -680,8 +669,9 @@ lỗi phát sinh trong quá trình vận hành. Nội dung kiểm thử tập tr
 qua thông báo lỗi không phù hợp, stack trace hoặc các phản hồi chi tiết từ phía máy chủ, vốn có thể bị kẻ tấn công lợi dụng để 
 thu thập thông tin phục vụ cho các bước tấn công tiếp theo.
 
-Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-ERRH, qua đó phản ánh mức độ an toàn của cơ chế 
-xử lý lỗi hiện tại cũng như khả năng kiểm soát thông tin được trả về cho người dùng khi xảy ra lỗi.
+Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-ERRH, 
+qua đó phản ánh mức độ an toàn của cơ chế xử lý lỗi và khả năng kiểm soát 
+thông tin trả về cho người dùng khi xảy ra lỗi, đồng thời đánh giá nguy cơ lộ lọt thông tin nhạy cảm có thể bị kẻ tấn công lợi dụng.
 
 \begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{7.5cm}|}
 \caption{Kết quả kiểm thử xử lý lỗi}\\
@@ -697,7 +687,7 @@ xử lý lỗi hiện tại cũng như khả năng kiểm soát thông tin đư�
 
 WSTG-ERRH-01 & Kiểm thử xử lý lỗi không đúng cách & Đạt. Không ghi nhận thông báo lỗi chi tiết hoặc rò rỉ thông tin nội bộ; các phản hồi lỗi được xử lý thống nhất và không để lộ dữ liệu nhạy cảm. \\ \hline
 
-WSTG-ERRH-02 & Kiểm thử việc lộ Stack trace & Nội dung này đã được hợp nhất vào mục WSTG-ERRH-01 Kiểm thử xử lý lỗi không đúng cách \\ \hline
+WSTG-ERRH-02 & Kiểm thử việc lộ Stack trace & Nội dung này đã được hợp nhất vào mục WSTG-ERRH-01 Kiểm thử xử lý lỗi không đúng cách. \\ \hline
 
 \end{longtable}
 
@@ -744,9 +734,8 @@ việc xác định các lỗ hổng phát sinh từ việc thực thi mã phía
 liệu trên trình duyệt, cũng như các cơ chế bảo vệ liên quan đến chia sẻ tài nguyên và tương tác giữa 
 các thành phần phía client.
 
-Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-CLNT, qua đó phản ánh 
-các chức năng phía client đã đáp ứng yêu cầu an toàn bảo mật, các trường hợp chưa đạt hoặc còn tồn 
-tại rủi ro, cũng như những hạng mục chưa thể đánh giá đầy đủ do giới hạn của mô hình kiểm thử hộp đen.
+Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-CLNT, qua đó phản ánh các chức năng phía client đã đáp ứng yêu cầu an toàn bảo mật, các trường hợp chưa đạt hoặc còn tồn tại rủi ro, cũng như những hạng mục chưa thể đánh giá đầy đủ do giới hạn của mô hình kiểm thử hộp đen.
+Kết quả này sẽ là cơ sở để đề xuất các biện pháp khắc phục phù hợp ở phần tiếp theo.
 
 \begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{6cm}|}
 \caption{Kết quả kiểm thử phía máy người dùng}\\
