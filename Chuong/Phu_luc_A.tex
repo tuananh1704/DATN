@@ -7,7 +7,18 @@
 
 Trong mục này, nội dung sẽ trình bày mục đích của từng nội dung kiểm thử thuộc 10 nhóm trong quy trình kiểm thử xâm nhập chủ động.
 
-\subsection*{a) Thu thập thông tin}
+\setcounter{section}{0}
+\renewcommand{\thesection}{\arabic{section}}
+\titleformat{\section}
+    [hang]
+    {\bfseries}
+    {\arabic{section}.\ \ \ \ }
+    {0pt}
+    {}
+    []
+\titlespacing{\section}{0pt}{\parskip}{0.5\parskip}
+
+\section{Thu thập thông tin}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
 
 \caption{Mục đích của nội dung thu thập thông tin}\\
@@ -74,7 +85,7 @@ Phân tích kiến trúc tổng thể của ứng dụng và các công nghệ �
 
 \end{longtable}
 
-\subsection*{b) Kiểm thử cấu hình và quản lý triển khai}
+\section{Kiểm thử cấu hình và quản lý triển khai}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
 
 \caption{Mục đích của nội dung kiểm thử cấu hình và quản lý triển khai}\\
@@ -161,7 +172,7 @@ Xác định các tiêu đề bảo mật HTTP được cấu hình không đún
 \end{longtable}
 
 
-\subsection*{c) Kiểm thử quản lý định danh}
+\section{Kiểm thử quản lý định danh}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
 
 \caption{Mục đích của nội dung kiểm thử quản lý định danh}\\
@@ -202,7 +213,7 @@ Kiểm thử chính sách tên người dùng yếu hoặc không được áp d
 
 \end{longtable}
 
-\subsection*{d) Kiểm thử xác thực}
+\section{Kiểm thử xác thực}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
 
 \caption{Mục đích của nội dung kiểm thử xác thực}\\
@@ -272,7 +283,7 @@ Xác định loại cơ chế xác thực đa yếu tố được ứng dụng t
 \\ \hline
 \end{longtable}
 
-\subsection*{e) Kiểm thử phân quyền}
+\section{Kiểm thử phân quyền}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
 
 \caption{Mục đích của nội dung kiểm thử phân quyền}\\
@@ -312,7 +323,7 @@ Kiểm thử các điểm yếu liên quan đến OAuth &
 \\ \hline
 \end{longtable}
 
-\subsection*{f) Kiểm thử quản lý phiên làm việc}
+\section{Kiểm thử quản lý phiên làm việc}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
 
 \caption{Mục đích của nội dung kiểm thử quản lý phiên làm việc}\\
@@ -382,7 +393,7 @@ Kiểm thử phiên làm việc đồng thời &
 \\ \hline
 \end{longtable}
 
-\subsection*{g) Kiểm thử xác thực dữ liệu đầu vào}
+\section{Kiểm thử xác thực dữ liệu đầu vào}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
 
 \caption{Mục đích của nội dung kiểm thử xác thực dữ liệu đầu vào}\\
@@ -499,7 +510,7 @@ Xác định các request có khả năng thay đổi đối tượng và đánh
 
 \end{longtable}
 
-\subsection*{h) Kiểm thử xử lý lỗi}
+\section{Kiểm thử xử lý lỗi}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
 
 \caption{Mục đích của nội dung kiểm thử xử lý lỗi}\\
@@ -525,7 +536,7 @@ Xác định việc ứng dụng có trả về stack trace hoặc thông tin ch
 
 \end{longtable}
 
-\subsection*{i) Kiểm thử mật mã yếu}
+\section{Kiểm thử mật mã yếu}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
 
 \caption{Mục đích của nội dung kiểm thử mật mã yếu}\\
@@ -561,7 +572,7 @@ Kiểm thử cơ chế mã hóa yếu &
 
 \end{longtable}
 
-\subsection*{j) Kiểm thử phía máy khách}
+\section{Kiểm thử phía máy khách}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
 
 \caption{Mục đích của nội dung kiểm thử phía máy khách}\\

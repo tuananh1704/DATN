@@ -21,93 +21,107 @@
 \contentsline {section}{\numberline {2.4}Giới thiệu các công cụ hỗ trợ cho thu thập thông tin hệ thống}{7}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Giới thiệu các công cụ kiểm thử}{8}{section.2.5}%
 \contentsline {subsection}{\numberline {2.5.1}Burp Suite}{8}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}SQLmap}{9}{subsection.2.5.2}%
-\contentsline {chapter}{\numberline {3}KIỂM THỬ HỆ THỐNG}{10}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Thu thập thông tin hệ thống}{10}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Khảo sát hệ thống}{10}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Sơ đồ chức năng trang web}{11}{subsection.3.1.2}%
-\contentsline {section}{\numberline {3.2}Kiểm thử cấu hình và triển khai}{15}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Kiểm thử quản lý định danh}{16}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Kiểm thử xác thực}{17}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Kiểm thử phân quyền}{18}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Kiểm thử quản lý phiên}{19}{section.3.6}%
-\contentsline {section}{\numberline {3.7}Kiểm thử xác thực đầu vào}{20}{section.3.7}%
-\contentsline {section}{\numberline {3.8}Kiểm thử xử lý lỗi}{22}{section.3.8}%
-\contentsline {section}{\numberline {3.9}Kiểm thử mật mã yếu}{22}{section.3.9}%
-\contentsline {section}{\numberline {3.10}Kiểm thử phía máy người dùng}{23}{section.3.10}%
-\contentsline {chapter}{\numberline {4}CÁC ĐÓNG GÓP NỔI BẬT}{25}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Tổng quan }{25}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Lỗ hổng lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất}{25}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Mức độ: Trung bình}{25}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Điểm CVSS: 3.2 (CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:H/A:N)}{25}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Mô tả:}{25}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Tác động:}{25}{subsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.2.5}Tái hiện:}{25}{subsection.4.2.5}%
-\contentsline {subsection}{\numberline {4.2.6}Biện pháp khắc phục:}{27}{subsection.4.2.6}%
-\contentsline {subsection}{\numberline {4.2.7}Tham chiếu:}{27}{subsection.4.2.7}%
-\contentsline {section}{\numberline {4.3}Chính sách mật khẩu yếu}{27}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Mức độ: Thấp}{27}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Điểm CVSS: 3.10 (CVSS:3.1/AV:N/AC:H/PR:H/UI:R/S:U/C:L/I:L/A:N)}{27}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Mô tả:}{27}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Tác động:}{28}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Tái hiện:}{28}{subsection.4.3.5}%
-\contentsline {subsection}{\numberline {4.3.6}Vị trí:}{29}{subsection.4.3.6}%
-\contentsline {subsection}{\numberline {4.3.7}Phương án khắc phục:}{29}{subsection.4.3.7}%
-\contentsline {subsection}{\numberline {4.3.8}Tham chiếu:}{30}{subsection.4.3.8}%
-\contentsline {section}{\numberline {4.4}Lỗ hổng Insecure Direct Object References (IDOR)}{30}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Mức độ: Cao}{30}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Điểm CVSS: 7.1 (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:H/A:N)}{30}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Mô tả:}{30}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Tác động:}{30}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}Tái hiện:}{30}{subsection.4.4.5}%
-\contentsline {subsection}{\numberline {4.4.6}Vị trí:}{33}{subsection.4.4.6}%
-\contentsline {subsection}{\numberline {4.4.7}Phương án khắc phục:}{33}{subsection.4.4.7}%
-\contentsline {section}{\numberline {4.5}Cookie không được cấu hình thuộc tính HttpOnly}{33}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Mức độ: Thấp}{33}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Điểm CVSS: 2.20 (CVSS:3.1/AV:N/AC:H/PR:H/UI:N/S:U/C:L/I:N/A:N)}{33}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Mô tả:}{33}{subsection.4.5.3}%
-\contentsline {subsection}{\numberline {4.5.4}Tác động:}{33}{subsection.4.5.4}%
-\contentsline {subsection}{\numberline {4.5.5}Tái hiện:}{34}{subsection.4.5.5}%
-\contentsline {subsection}{\numberline {4.5.6}Vị trí:}{34}{subsection.4.5.6}%
-\contentsline {subsection}{\numberline {4.5.7}Phương án khắc phục:}{34}{subsection.4.5.7}%
-\contentsline {section}{\numberline {4.6}Lỗ hổng Stored XSS (Cross-Site Scripting)}{34}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}Mức độ: Cao}{34}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Điểm CVSS: 8.20 (CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:L/A:N)}{34}{subsection.4.6.2}%
-\contentsline {subsection}{\numberline {4.6.3}Mô tả:}{34}{subsection.4.6.3}%
-\contentsline {subsection}{\numberline {4.6.4}Tác động:}{34}{subsection.4.6.4}%
-\contentsline {subsection}{\numberline {4.6.5}Tái hiện:}{34}{subsection.4.6.5}%
-\contentsline {section}{\numberline {4.7}Lỗ hổng SQL Injection}{38}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Mức độ:}{38}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Điểm CVSS:}{38}{subsection.4.7.2}%
-\contentsline {subsection}{\numberline {4.7.3}Mô tả:}{38}{subsection.4.7.3}%
-\contentsline {subsection}{\numberline {4.7.4}Tác động:}{39}{subsection.4.7.4}%
-\contentsline {subsection}{\numberline {4.7.5}Tái hiện:}{39}{subsection.4.7.5}%
-\contentsline {subsection}{\numberline {4.7.6}Vị trí:}{43}{subsection.4.7.6}%
-\contentsline {subsection}{\numberline {4.7.7}Phương án khắc phục:}{43}{subsection.4.7.7}%
-\contentsline {section}{\numberline {4.8}Lỗ hổng HTTP Request smuggling}{44}{section.4.8}%
-\contentsline {subsection}{\numberline {4.8.1}Mức độ:}{44}{subsection.4.8.1}%
-\contentsline {subsection}{\numberline {4.8.2}Điểm CVSS:}{44}{subsection.4.8.2}%
-\contentsline {subsection}{\numberline {4.8.3}Mô tả:}{44}{subsection.4.8.3}%
-\contentsline {subsection}{\numberline {4.8.4}Tác động:}{44}{subsection.4.8.4}%
-\contentsline {subsection}{\numberline {4.8.5}Tái hiện:}{44}{subsection.4.8.5}%
-\contentsline {subsection}{\numberline {4.8.6}Vị trí:}{44}{subsection.4.8.6}%
-\contentsline {subsection}{\numberline {4.8.7}Phương án khắc phục:}{44}{subsection.4.8.7}%
-\contentsline {section}{\numberline {4.9}Hỗ trợ thuật toán mã hóa yếu trong TLS 1.2}{44}{section.4.9}%
-\contentsline {subsection}{\numberline {4.9.1}Mức độ:}{44}{subsection.4.9.1}%
-\contentsline {subsection}{\numberline {4.9.2}Điểm CVSS:}{44}{subsection.4.9.2}%
-\contentsline {subsection}{\numberline {4.9.3}Mô tả:}{44}{subsection.4.9.3}%
-\contentsline {subsection}{\numberline {4.9.4}Tác động:}{44}{subsection.4.9.4}%
-\contentsline {subsection}{\numberline {4.9.5}Tái hiện:}{44}{subsection.4.9.5}%
-\contentsline {subsection}{\numberline {4.9.6}Vị trí:}{45}{subsection.4.9.6}%
-\contentsline {subsection}{\numberline {4.9.7}Phương án khắc phục:}{45}{subsection.4.9.7}%
-\contentsline {subsection}{\numberline {4.9.8}Tham chiếu:}{45}{subsection.4.9.8}%
-\contentsline {chapter}{\numberline {5}KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}{46}{chapter.5}%
-\contentsline {chapter}{TÀI LIỆU THAM KHẢO}{50}{section*.39}%
-\contentsline {chapter}{PHỤ LỤC}{52}{section*.40}%
-\ttl@change@i {\@ne }{chapter}{0.0cm}{\bfseries \vspace {0.3cm}}{{\bfseries {\scshape } \thecontentslabel .\ }}{}{\titlerule *[0.3pc]{.}\contentspage }\relax 
+\contentsline {subsection}{\numberline {2.5.2}SQLmap}{8}{subsection.2.5.2}%
+\contentsline {chapter}{\numberline {3}KIỂM THỬ HỆ THỐNG}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Thu thập thông tin hệ thống}{9}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Khảo sát hệ thống}{9}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Sơ đồ chức năng trang web}{10}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Kiểm thử cấu hình và triển khai}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Kiểm thử quản lý định danh}{15}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Kiểm thử xác thực}{16}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Kiểm thử phân quyền}{17}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Kiểm thử quản lý phiên}{18}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Kiểm thử xác thực đầu vào}{19}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Kiểm thử xử lý lỗi}{20}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Kiểm thử mật mã yếu}{21}{section.3.9}%
+\contentsline {section}{\numberline {3.10}Kiểm thử phía máy người dùng}{22}{section.3.10}%
+\contentsline {chapter}{\numberline {4}CÁC ĐÓNG GÓP NỔI BẬT}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Tổng quan }{24}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Lưu trữ dữ liệu nhạy cảm trong lịch sử trình duyệt sau khi đăng xuất}{25}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Đánh giá rủi ro bảo mật: Thấp}{25}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Mô tả}{25}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Tác động}{26}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Tái hiện}{26}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Vị trí}{27}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.6}Phương án khắc phục}{28}{subsection.4.2.6}%
+\contentsline {subsection}{\numberline {4.2.7}Tham chiếu:}{28}{subsection.4.2.7}%
+\contentsline {section}{\numberline {4.3}Thiếu cơ chế bảo vệ chống tấn công Brute Force trong chức năng xác thực}{28}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Đánh giá rủi ro bảo mật: Cao}{28}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Mô tả}{29}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Tác động}{29}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Tái hiện}{30}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Vị trí}{30}{subsection.4.3.5}%
+\contentsline {subsection}{\numberline {4.3.6}Phương án khắc phục}{30}{subsection.4.3.6}%
+\contentsline {subsection}{\numberline {4.3.7}Tham chiếu}{31}{subsection.4.3.7}%
+\contentsline {section}{\numberline {4.4}Chính sách mật khẩu yếu}{31}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Đánh giá rủi ro bảo mật: Cao}{31}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Mô tả}{32}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Tác động}{32}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.4}Tái hiện}{32}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.5}Vị trí}{33}{subsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.4.6}Phương án khắc phục}{33}{subsection.4.4.6}%
+\contentsline {subsection}{\numberline {4.4.7}Tham chiếu:}{34}{subsection.4.4.7}%
+\contentsline {section}{\numberline {4.5}Lỗ hổng Insecure Direct Object References (IDOR)}{34}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Đánh giá rủi ro bảo mật: Cao}{34}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Mô tả}{34}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Tác động}{35}{subsection.4.5.3}%
+\contentsline {subsection}{\numberline {4.5.4}Tái hiện}{35}{subsection.4.5.4}%
+\contentsline {subsection}{\numberline {4.5.5}Vị trí}{38}{subsection.4.5.5}%
+\contentsline {subsection}{\numberline {4.5.6}Phương án khắc phục}{38}{subsection.4.5.6}%
+\contentsline {subsection}{\numberline {4.5.7}Tham chiếu:}{39}{subsection.4.5.7}%
+\contentsline {section}{\numberline {4.6}Cookie không được cấu hình thuộc tính HttpOnly}{39}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Đánh giá rủi ro bảo mật: Thấp}{39}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Mô tả}{39}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Tác động}{40}{subsection.4.6.3}%
+\contentsline {subsection}{\numberline {4.6.4}Tái hiện}{40}{subsection.4.6.4}%
+\contentsline {subsection}{\numberline {4.6.5}Vị trí}{40}{subsection.4.6.5}%
+\contentsline {subsection}{\numberline {4.6.6}Phương án khắc phục}{40}{subsection.4.6.6}%
+\contentsline {subsection}{\numberline {4.6.7}Tham chiếu:}{40}{subsection.4.6.7}%
+\contentsline {section}{\numberline {4.7}Lỗ hổng Stored XSS (Cross-Site Scripting)}{40}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Đánh giá rủi ro bảo mật: Cao}{40}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Mô tả}{41}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Tác động}{41}{subsection.4.7.3}%
+\contentsline {subsection}{\numberline {4.7.4}Tái hiện}{42}{subsection.4.7.4}%
+\contentsline {subsection}{\numberline {4.7.5}Phương án khắc phục}{45}{subsection.4.7.5}%
+\contentsline {subsection}{\numberline {4.7.6}Tham chiếu:}{45}{subsection.4.7.6}%
+\contentsline {section}{\numberline {4.8}Lỗ hổng SQL Injection}{45}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}Đánh giá rủi ro bảo mật: Cao}{45}{subsection.4.8.1}%
+\contentsline {subsection}{\numberline {4.8.2}Mô tả}{46}{subsection.4.8.2}%
+\contentsline {subsection}{\numberline {4.8.3}Tác động}{46}{subsection.4.8.3}%
+\contentsline {subsection}{\numberline {4.8.4}Tái hiện}{47}{subsection.4.8.4}%
+\contentsline {subsection}{\numberline {4.8.5}Vị trí}{51}{subsection.4.8.5}%
+\contentsline {subsection}{\numberline {4.8.6}Phương án khắc phục}{51}{subsection.4.8.6}%
+\contentsline {subsection}{\numberline {4.8.7}Tham chiếu:}{51}{subsection.4.8.7}%
+\contentsline {section}{\numberline {4.9}Lỗ hổng HTTP Request smuggling}{51}{section.4.9}%
+\contentsline {subsection}{\numberline {4.9.1}Đánh giá rủi ro bảo mật: Cao}{51}{subsection.4.9.1}%
+\contentsline {subsection}{\numberline {4.9.2}Mô tả}{52}{subsection.4.9.2}%
+\contentsline {subsection}{\numberline {4.9.3}Tác động}{52}{subsection.4.9.3}%
+\contentsline {subsection}{\numberline {4.9.4}Tái hiện}{52}{subsection.4.9.4}%
+\contentsline {subsection}{\numberline {4.9.5}Vị trí}{58}{subsection.4.9.5}%
+\contentsline {subsection}{\numberline {4.9.6}Phương án khắc phục}{58}{subsection.4.9.6}%
+\contentsline {subsection}{\numberline {4.9.7}Tham chiếu:}{58}{subsection.4.9.7}%
+\contentsline {section}{\numberline {4.10}Hỗ trợ thuật toán mã hóa yếu trong TLS 1.2}{58}{section.4.10}%
+\contentsline {subsection}{\numberline {4.10.1}Đánh giá rủi ro bảo mật: Thấp}{58}{subsection.4.10.1}%
+\contentsline {subsection}{\numberline {4.10.2}Mô tả}{59}{subsection.4.10.2}%
+\contentsline {subsection}{\numberline {4.10.3}Tác động}{59}{subsection.4.10.3}%
+\contentsline {subsection}{\numberline {4.10.4}Tái hiện}{59}{subsection.4.10.4}%
+\contentsline {subsection}{\numberline {4.10.5}Vị trí}{60}{subsection.4.10.5}%
+\contentsline {subsection}{\numberline {4.10.6}Phương án khắc phục}{60}{subsection.4.10.6}%
+\contentsline {subsection}{\numberline {4.10.7}Tham chiếu:}{60}{subsection.4.10.7}%
+\contentsline {chapter}{KẾT LUẬN}{61}{chapter*.54}%
+\contentsline {chapter}{TÀI LIỆU THAM KHẢO}{62}{section*.56}%
+\contentsline {chapter}{PHỤ LỤC}{64}{section*.57}%
+\ttl@change@i {\@ne }{chapter}{0.0cm}{\bfseries \vspace {0.3cm}}{{\bfseries {\scshape } }}{}{\titlerule *[0.3pc]{.}\contentspage }\relax 
 \ttl@change@v {chapter}{}{}{}\relax 
-\contentsline {chapter}{\numberline {A}MỤC ĐÍCH CỦA CÁC NỘI DUNG KIỂM THỬ THEO TỪNG DANH MỤC}{52}{appendix.1.A}%
-\contentsline {chapter}{\numberline {B}ĐẶC TẢ USE CASE}{67}{appendix.1.B}%
-\contentsline {section}{\numberline {B.1}Đặc tả use case ``Thống kê tình hình mượn sách''}{67}{section.1.B.1}%
-\contentsline {section}{\numberline {B.2}Đặc tả use case ``Đăng ký làm thẻ mượn''}{67}{section.1.B.2}%
+\contentsline {chapter}{MỤC ĐÍCH CỦA CÁC NỘI DUNG KIỂM THỬ THEO TỪNG DANH MỤC}{64}{appendix*.58}%
+\contentsline {section}{\numberline {1}Thu thập thông tin}{64}{section.1..1}%
+\contentsline {section}{\numberline {2}Kiểm thử cấu hình và quản lý triển khai}{65}{section.1..2}%
+\contentsline {section}{\numberline {3}Kiểm thử quản lý định danh}{67}{section.1..3}%
+\contentsline {section}{\numberline {4}Kiểm thử xác thực}{68}{section.1..4}%
+\contentsline {section}{\numberline {5}Kiểm thử phân quyền}{70}{section.1..5}%
+\contentsline {section}{\numberline {6}Kiểm thử quản lý phiên làm việc}{71}{section.1..6}%
+\contentsline {section}{\numberline {7}Kiểm thử xác thực dữ liệu đầu vào}{72}{section.1..7}%
+\contentsline {section}{\numberline {8}Kiểm thử xử lý lỗi}{74}{section.1..8}%
+\contentsline {section}{\numberline {9}Kiểm thử mật mã yếu}{75}{section.1..9}%
+\contentsline {section}{\numberline {10}Kiểm thử phía máy khách}{76}{section.1..10}%
 \contentsfinish 
