@@ -101,34 +101,55 @@ web. Việc áp dụng khung phương pháp luận này nhằm đảm bảo quá
 thử được triển khai một cách nhất quán, có cơ sở khoa học và có thể đối 
 chiếu với các tiêu chuẩn bảo mật phổ biến hiện nay.
 
-Giai đoạn 10: Kiểm thử logic nghiệp vụ không được đưa vào phạm vi thực hiện do 
+Trong quá trình kiêm thử, giai đoạn 10: Kiểm thử logic nghiệp vụ không được đưa vào phạm vi thực hiện do 
 ứng dụng web không có các quy trình nghiệp vụ phức tạp hoặc các luồng xử lý đặc 
 thù cần kiểm thử chuyên sâu. Việc loại trừ giai đoạn này giúp đảm bảo kế hoạch 
 kiểm thử tập trung đúng trọng tâm và phù hợp với mục tiêu nghiên cứu của đồ án.
 
 \section{Giới thiệu các công cụ hỗ trợ cho thu thập thông tin hệ thống}
-\begin{itemize}
-    \item \textbf{Wappalyzer}: Một tiện ích mở rộng trên trình duyệt, cho phép nhận diện các công nghệ được sử dụng trên website, bao gồm framework, thư viện, hệ quản trị nội dung (CMS) và các công cụ phân tích. Công cụ này hỗ trợ người kiểm thử xác định nền tảng và hạ tầng phía máy chủ của ứng dụng web, từ đó đánh giá bề mặt tấn công tiềm năng và định hướng các bước kiểm thử bảo mật phù hợp.
-    \item \textbf{Dirsearch}: Một công cụ hoạt động trên giao diện dòng lệnh, được sử dụng để dò quét và phát hiện các thư mục cũng như tệp tin tồn tại trên hệ thống máy chủ web thông qua kỹ thuật brute force. Công cụ này hỗ trợ quá trình thu thập và khám phá nội dung web một cách hiệu quả nhờ khả năng sử dụng đa dạng wordlist, độ chính xác cao, hiệu suất xử lý tốt, các tùy chọn cấu hình yêu cầu HTTP linh hoạt, cùng với việc áp dụng các kỹ thuật brute force hiện đại và cơ chế hiển thị kết quả trực quan.
-    \item \textbf{WhatWeb}: Công cụ hỗ trợ nhận dạng và phân tích các công nghệ nền tảng của ứng dụng web. Công cụ này cho phép xác định các thành phần như hệ quản trị nội dung (CMS), các framework và thư viện JavaScript, dịch vụ phân tích – thống kê, máy chủ web cũng như các thiết bị nhúng đang được triển khai, từ đó giúp đánh giá tổng quan kiến trúc và bề mặt tấn công tiềm năng của hệ thống.
-    \item \textbf{Nmap}: Một công cụ mã nguồn mở phổ biến trong lĩnh vực an toàn thông tin, được sử dụng để quét và thu thập thông tin về hạ tầng mạng cũng như đánh giá mức độ an toàn của các hệ thống. Công cụ này hỗ trợ phát hiện các máy chủ đang hoạt động, các cổng và dịch vụ đang mở, từ đó giúp người kiểm thử nắm bắt tổng quan kiến trúc mạng, phục vụ cho quá trình đánh giá bảo mật, quản lý tài nguyên và giám sát trạng thái hệ thống.
-    \item \textbf{Shodan}: Plugin Shodan hỗ trợ thu thập thông tin hạ tầng của website, bao gồm vị trí máy chủ (quốc gia, thành phố), thông tin chủ sở hữu địa chỉ IP, cũng như các dịch vụ và cổng mạng đang được mở. Plugin này, khi tích hợp trên trình duyệt Chrome, sẽ tự động đối chiếu website đang truy cập với cơ sở dữ liệu của Shodan để xác định các thông tin đã được ghi nhận. Qua đó, người kiểm thử có thể phát hiện các dịch vụ đang hoạt động như FTP, DNS, SSH hoặc các dịch vụ không phổ biến khác. Toàn bộ dữ liệu mà Shodan thu thập được về website hoặc tên miền mục tiêu đều có thể được hiển thị thông qua plugin này, phục vụ cho quá trình thu thập thông tin và đánh giá bề mặt tấn công.
-\end{itemize}
-\textbf{CHƯA HOÀN THIỆN}
+
+Wappalyzer: Một tiện ích mở rộng trên trình duyệt, cho phép nhận diện các công nghệ được sử dụng trên website, bao gồm framework, thư viện, hệ quản trị nội dung (CMS) và các công cụ phân tích. Công cụ này hỗ trợ người kiểm thử xác định nền tảng và hạ tầng phía máy chủ của ứng dụng web, từ đó đánh giá bề mặt tấn công tiềm năng và định hướng các bước kiểm thử bảo mật phù hợp.
+
+Dirsearch: Một công cụ hoạt động trên giao diện dòng lệnh, được sử dụng để dò quét và phát hiện các thư mục cũng như tệp tin tồn tại trên hệ thống máy chủ web thông qua kỹ thuật brute force. Công cụ này hỗ trợ quá trình thu thập và khám phá nội dung web một cách hiệu quả nhờ khả năng sử dụng đa dạng wordlist, độ chính xác cao, hiệu suất xử lý tốt, các tùy chọn cấu hình yêu cầu HTTP linh hoạt, cùng với việc áp dụng các kỹ thuật brute force hiện đại và cơ chế hiển thị kết quả trực quan.
+
+WhatWeb: Công cụ hỗ trợ nhận dạng và phân tích các công nghệ nền tảng của ứng dụng web. Công cụ này cho phép xác định các thành phần như hệ quản trị nội dung (CMS), các framework và thư viện JavaScript, dịch vụ phân tích – thống kê, máy chủ web cũng như các thiết bị nhúng đang được triển khai, từ đó giúp đánh giá tổng quan kiến trúc và bề mặt tấn công tiềm năng của hệ thống.
+
+Nmap: Một công cụ mã nguồn mở phổ biến trong lĩnh vực an toàn thông tin, được sử dụng để quét và thu thập thông tin về hạ tầng mạng cũng như đánh giá mức độ an toàn của các hệ thống. Công cụ này hỗ trợ phát hiện các máy chủ đang hoạt động, các cổng và dịch vụ đang mở, từ đó giúp người kiểm thử nắm bắt tổng quan kiến trúc mạng, phục vụ cho quá trình đánh giá bảo mật, quản lý tài nguyên và giám sát trạng thái hệ thống.
+
+Gobuster: Một công cụ mã nguồn mở hoạt động trên giao diện dòng lệnh, được sử dụng để dò quét và phát hiện các tài nguyên ẩn trên ứng dụng web như thư mục, tệp tin và tên miền con thông qua kỹ thuật brute force. Công cụ này giúp người kiểm thử phát hiện các thành phần chưa được công bố của hệ thống, từ đó mở rộng phạm vi thu thập thông tin và đánh giá bề mặt tấn công tiềm năng của hệ thống.
+    % \item \textbf{Shodan}: Plugin Shodan hỗ trợ thu thập thông tin hạ tầng của website, bao gồm vị trí máy chủ (quốc gia, thành phố), thông tin chủ sở hữu địa chỉ IP, cũng như các dịch vụ và cổng mạng đang được mở. Plugin này, khi tích hợp trên trình duyệt Chrome, sẽ tự động đối chiếu website đang truy cập với cơ sở dữ liệu của Shodan để xác định các thông tin đã được ghi nhận. Qua đó, người kiểm thử có thể phát hiện các dịch vụ đang hoạt động như FTP, DNS, SSH hoặc các dịch vụ không phổ biến khác. Toàn bộ dữ liệu mà Shodan thu thập được về website hoặc tên miền mục tiêu đều có thể được hiển thị thông qua plugin này, phục vụ cho quá trình thu thập thông tin và đánh giá bề mặt tấn công.
+
+
 
 \section{Giới thiệu các công cụ kiểm thử}
 \subsection{Burp Suite}
 Burp Suite là một bộ công cụ kiểm thử bảo mật nổi tiếng do PortSwigger phát triển, được thiết kế chuyên biệt cho việc đánh giá an toàn ứng dụng web. Đây là công cụ được đa số chuyên gia bảo mật sử dụng nhờ khả năng hỗ trợ mạnh mẽ cho các hoạt động pentest. Bộ công cụ này bao gồm nhiều tính năng hỗ trợ quá trình kiểm thử hiệu quả, bao gồm:
 
-\begin{itemize}
-    \item \textbf{Interception Proxy}: Thành phần Proxy cho phép Burp đóng vai trò trung gian giữa trình duyệt và máy chủ ứng dụng. Khi hoạt động ở vị trí này, Burp có thể theo dõi, chặn và chỉnh sửa toàn bộ lưu lượng cũng như các yêu cầu được gửi qua lại giữa hai bên.
-    \item \textbf{Repeater}: Repeater cho phép pentester gửi lại một yêu cầu nhiều lần. Người kiểm thử có thể tự do chỉnh sửa request trước khi gửi đi để quan sát phản hồi của máy chủ, từ đó dễ dàng kiểm tra và khai thác các lỗ hổng tiềm ẩn.
-    \item \textbf{Intruder}: Intruder là công cụ chuyên thực hiện các cuộc tấn công tự động với mức tùy biến cao. Công cụ này có thể gửi hàng loạt request lặp lại, đồng thời chèn các payload khác nhau vào các vị trí xác định. Intruder được sử dụng trong nhiều hoạt động như fuzzing, brute-force, liệt kê thông tin đầu vào hợp lệ hoặc thu thập dữ liệu cần thiết từ ứng dụng.
-    \item \textbf{Collaborator}: Collaborator cung cấp cho pentester một dịch vụ bên thứ ba trên Internet, cho phép ghi nhận các tương tác bên ngoài không xuất hiện trực tiếp trong phản hồi HTTP. Đây là thành phần quan trọng khi kiểm tra các lỗ hổng không trả về dữ liệu qua phản hồi máy chủ, chẳng hạn như SSRF hay lỗ hổng OAST.
-    \item \textbf{Vulnerability Scanner}: Scanner là tính năng nổi bật của phiên bản Burp Suite Professional. Công cụ này tự động thực hiện quét thụ động trên toàn bộ lưu lượng giữa client và server, đồng thời hỗ trợ quét chủ động trên các yêu cầu do người kiểm thử lựa chọn. Từ đó, Scanner giúp phát hiện nhanh các lỗ hổng phổ biến trong ứng dụng web.
-\end{itemize}
+
+Interception Proxy: Thành phần Proxy cho phép Burp đóng vai trò trung gian giữa trình duyệt và máy chủ ứng dụng. Khi hoạt động ở vị trí này, Burp có thể theo dõi, chặn và chỉnh sửa toàn bộ lưu lượng cũng như các yêu cầu được gửi qua lại giữa hai bên.
+
+Repeater: Repeater cho phép pentester gửi lại một yêu cầu nhiều lần. Người kiểm thử có thể tự do chỉnh sửa request trước khi gửi đi để quan sát phản hồi của máy chủ, từ đó dễ dàng kiểm tra và khai thác các lỗ hổng tiềm ẩn.
+
+Intruder: Intruder là công cụ chuyên thực hiện các cuộc tấn công tự động với mức tùy biến cao. Công cụ này có thể gửi hàng loạt request lặp lại, đồng thời chèn các payload khác nhau vào các vị trí xác định. Intruder được sử dụng trong nhiều hoạt động như fuzzing, brute-force, liệt kê thông tin đầu vào hợp lệ hoặc thu thập dữ liệu cần thiết từ ứng dụng.
+
+Collaborator: Collaborator cung cấp cho pentester một dịch vụ bên thứ ba trên Internet, cho phép ghi nhận các tương tác bên ngoài không xuất hiện trực tiếp trong phản hồi HTTP. Đây là thành phần quan trọng khi kiểm tra các lỗ hổng không trả về dữ liệu qua phản hồi máy chủ, chẳng hạn như SSRF hay lỗ hổng OAST.
+
+Vulnerability Scanner: Scanner là tính năng nổi bật của phiên bản Burp Suite Professional. Công cụ này tự động thực hiện quét thụ động trên toàn bộ lưu lượng giữa client và server, đồng thời hỗ trợ quét chủ động trên các yêu cầu do người kiểm thử lựa chọn. Từ đó, Scanner giúp phát hiện nhanh các lỗ hổng phổ biến trong ứng dụng web.
+
 
 \subsection{SQLmap}
+
+SQLmap là một công cụ kiểm thử xâm nhập mã nguồn mở, được thiết kế 
+nhằm tự động hóa quá trình phát hiện và khai thác các lỗ hổng SQL 
+Injection trên ứng dụng web. Công cụ này cho phép người kiểm thử 
+đánh giá khả năng chiếm quyền kiểm soát máy chủ cơ sở dữ liệu thông 
+qua các điểm đầu vào không an toàn. SQLmap được trang bị cơ chế phát 
+hiện mạnh mẽ cùng nhiều tính năng chuyên sâu, bao gồm nhận dạng loại 
+và phiên bản cơ sở dữ liệu, trích xuất dữ liệu, truy cập hệ thống 
+tệp phía máy chủ và thực thi lệnh trên hệ điều hành thông qua các 
+kênh kết nối ngoài băng (out-of-band). Nhờ đó, SQLmap hỗ trợ hiệu 
+quả quá trình đánh giá mức độ ảnh hưởng và phạm vi khai thác của 
+lỗ hổng SQL Injection.
 
 %\subsection{Đặc tả use case A}
 %\hfill

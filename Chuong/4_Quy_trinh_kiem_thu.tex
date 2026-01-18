@@ -18,7 +18,7 @@ Hoạt động khảo sát hệ thống tập trung vào việc xác định cá
 nền tảng và thư viện 
 được sử dụng, cũng như kiểm tra các yếu tố có khả năng làm lộ thông tin hoặc 
 mở rộng bề mặt tấn công của ứng dụng web. Kết quả khảo sát hệ thống được tổng 
-hợp và trình bày chi tiết trong bảng dưới đây
+hợp và trình bày chi tiết trong bảng dưới đây.
 
 \begin{longtable}{|>{\centering\arraybackslash}p{1cm}|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{2cm}|>{\raggedright\arraybackslash}p{6cm}|>{\centering\arraybackslash}p{3.2cm}|}
 \caption{Kết quả khảo sát hệ thống}\\
@@ -360,13 +360,13 @@ WSTG-CONF-10 & Kiểm thử khả năng chiếm quyền tên miền phụ &
 Không thể tiến hành do tài khoản kiểm thử không có quyền truy cập tài nguyên liên quan. \\ \hline
 
 WSTG-CONF-11 & Kiểm thử cấu hình lưu trữ đám mây &
-Đạt. \\ \hline
+Không phát hiện cấu hình sai hoặc rò rỉ dữ liệu liên quan đến các dịch vụ lưu trữ đám mây. \\ \hline
 
 WSTG-CONF-12 & Kiểm thử chính sách bảo mật nội dung &
 Thiếu tiêu đề CSP (Content Security Policy). \\ \hline
 
 WSTG-CONF-13 & Kiểm thử nhầm lẫn đường dẫn &
-Đạt. \\ \hline
+Không phát hiện liên kết hoặc tệp tin riêng tư của người dùng đặc biệt bị rò rỉ. \\ \hline
 
 WSTG-CONF-14 & Kiểm thử sai cấu hình các header bảo mật HTTP khác &
 X-Frame-Options và Cache-Control bị trùng lặp có thể gây xung đột. \\ \hline
@@ -449,7 +449,7 @@ Kiểm thử tài khoản mặc định &
 
 WSTG-ATHN-03 &
 Kiểm thử cơ chế khóa tài khoản yếu &
- \\ \hline
+Không đạt. Không ghi nhận cơ chế khóa hoặc hạn chế đăng nhập sau nhiều lần xác thực thất bại. \\ \hline
 
 WSTG-ATHN-04 &
 Kiểm thử việc vượt qua sơ đồ xác thực &
@@ -465,7 +465,7 @@ Không đạt. Sau khi người dùng đăng xuất, nếu nhấn nút “Back�
 
 WSTG-ATHN-07 &
 Kiểm thử phương thức xác thực yếu &
-Ứng dụng chỉ yêu cầu mật khẩu có 8 ký tự mà không có thêm yêu cầu khác về độ phức tạp (ký tự thường, ký tự hoa, số, ký tự đặc biệt). \\ \hline
+Không đạt. Ứng dụng chỉ yêu cầu mật khẩu có 8 ký tự mà không có thêm yêu cầu khác về độ phức tạp (ký tự thường, ký tự hoa, số, ký tự đặc biệt). \\ \hline
 
 WSTG-ATHN-08 &
 Kiểm thử câu hỏi bảo mật dễ đoán &
@@ -516,12 +516,12 @@ Kiểm thử Directory Traversal File Include &
 
 WSTG-ATHZ-02 &
 Kiểm thử vượt qua cơ chế phân quyền &
-Đạt. \\
+Đạt. Không phát hiện khả năng truy cập trái phép vào các chức năng hoặc tài nguyên ngoài quyền hạn được cấp. \\
 \hline
 
 WSTG-ATHZ-03 &
-Kiểm thử leo thang đặc quyền &
-Đạt. \\
+Đạt. Kiểm thử leo thang đặc quyền &
+Không ghi nhận khả năng nâng cao đặc quyền trái phép. \\
 \hline
 
 WSTG-ATHZ-04 &
@@ -564,7 +564,7 @@ Kiểm tra sơ đồ quản lý phiên &
 
 WSTG-SESS-02 &
 Kiểm tra các thuộc tính của cookie &
-Cookie không được cấu hình thuộc tính HttpOnly. \\ \hline
+Không đạt. Cookie không được cấu hình thuộc tính HttpOnly. \\ \hline
 
 WSTG-SESS-03 &
 Kiểm tra lỗ hổng cố định phiên &
@@ -572,11 +572,11 @@ Kiểm tra lỗ hổng cố định phiên &
 
 WSTG-SESS-04 &
 Kiểm tra các biến phiên bị lộ &
-Đạt. Cơ chế \texttt{Cache-Control} được bảo mật, tuy nhiên header \texttt{Expires} nên để là “0” thay vì để trống. \\ \hline
+Đạt. Cơ chế Cache-Control được bảo mật, tuy nhiên header Expires nên để là “0” thay vì để trống. \\ \hline
 
 WSTG-SESS-05 &
 Kiểm tra lỗ hổng CSRF &
- \\ \hline
+Đạt. Không phát hiện lỗ hổng Cross-Site Request Forgery (CSRF) trong quá trình kiểm thử. \\ \hline
 
 WSTG-SESS-06 &
 Kiểm tra chức năng đăng xuất &
@@ -584,15 +584,15 @@ Kiểm tra chức năng đăng xuất &
 
 WSTG-SESS-07 &
 Kiểm tra cơ chế hết hạn phiên &
-Đạt. Thời gian hết hạn phiên khoảng 1 giờ hoạt động đúng cách. \\ \hline
+Đạt. Thời gian hết hạn phiên khoảng 4 giờ hoạt động đúng cách. \\ \hline
 
 WSTG-SESS-08 &
 Kiểm tra lỗ hổng Session Puzzling &
- \\ \hline
+Đat. Không phát hiện lỗ hổng Session Puzzling trong phạm vi kiểm thử. \\ \hline
 
 WSTG-SESS-09 &
 Kiểm tra lỗ hổng chiếm đoạt phiên &
-Cookie không có cờ \texttt{HttpOnly}, điều này có thể dẫn đến lỗ hổng chiếm đoạt phiên. \\ \hline
+Cookie không có cờ HttpOnly, điều này có thể dẫn đến lỗ hổng chiếm đoạt phiên. \\ \hline
 
 WSTG-SESS-10 &
 Kiểm tra JWT (JSON Web Tokens) &
@@ -618,7 +618,7 @@ qua đó phản ánh các cơ chế kiểm soát dữ liệu đầu vào đã đ
 thời chỉ ra các trường hợp chưa đạt và những lỗ hổng còn tồn tại có thể bị khai thác nếu không 
 được khắc phục kịp thời.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{7cm}|>{\centering\arraybackslash}p{5cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{2cm}|>{\centering\arraybackslash}p{4cm}|>{\centering\arraybackslash}p{8cm}|}
 \caption{Kết quả kiểm thử xác thực đầu vào}\\
 \hline
 \textbf{ID} & \textbf{Nội dung} & \textbf{Kết luận} \\
@@ -630,46 +630,46 @@ thời chỉ ra các trường hợp chưa đạt và những lỗ hổng còn t
 \hline
 \endhead
 
-WSTG-INPV-01 & Kiểm thử XSS phản chiếu & Đạt \\ \hline
+WSTG-INPV-01 & Kiểm thử XSS phản chiếu & Đạt. Không phát hiện lỗ hổng XSS phản chiếu. \\ \hline
 
 WSTG-INPV-02 & Kiểm thử XSS lưu trữ & 
 Không đạt. Chức năng “Tạo sự kiện mới”, “Chỉnh sửa hồ sơ cá nhân” có lưu trữ và hiển thị lại dữ liệu phía client. \\ \hline
 
-WSTG-INPV-03 & Kiểm thử giả mạo phương thức HTTP & Đạt \\ \hline
+WSTG-INPV-03 & Kiểm thử giả mạo phương thức HTTP & Đạt. Không phát hiện lỗ hổng giả mạo phương thức HTTP. \\ \hline
 
-WSTG-INPV-04 & Kiểm thử ô nhiễm tham số HTTP & Đạt \\ \hline
+WSTG-INPV-04 & Kiểm thử ô nhiễm tham số HTTP & Đạt. Không phát hiện lỗ hổng ô nhiễm tham số HTTP. \\ \hline
 
-WSTG-INPV-05 & Kiểm thử SQL Injection &  \\ \hline
+WSTG-INPV-05 & Kiểm thử SQL Injection & Không đạt. Ứng dụng có tồn tại lỗ hổng SQL Injection ở Dashboard. \\ \hline
 
-WSTG-INPV-06 & Kiểm thử LDAP Injection & Đạt \\ \hline
+WSTG-INPV-06 & Kiểm thử LDAP Injection & Đạt. Không phát hiện lỗ hổng LDAP Injection. \\ \hline
 
-WSTG-INPV-07 & Kiểm thử XML Injection & Đạt \\ \hline
+WSTG-INPV-07 & Kiểm thử XML Injection & Đạt. Không phát hiện lỗ hổng XML Injection. \\ \hline
 
-WSTG-INPV-08 & Kiểm thử SQL Server & Đạt \\ \hline
+WSTG-INPV-08 & Kiểm thử SSI Injection & Đạt. Không phát hiện lỗ hổng SSI Injection. \\ \hline
 
-WSTG-INPV-09 & Kiểm thử Xpath Injection & Đạt \\ \hline
+WSTG-INPV-09 & Kiểm thử Xpath Injection & Đạt. Không phát hiện lỗ hổng Xpath Injection. \\ \hline
 
-WSTG-INPV-10 & Kiểm thử IMAP SMTP Injection & Đạt \\ \hline
+WSTG-INPV-10 & Kiểm thử IMAP SMTP Injection & Đạt. Không phát hiện lỗ hổng IMAP SMTP Injection. \\ \hline
 
-WSTG-INPV-11 & Kiểm thử Code Injection & Đạt \\ \hline
+WSTG-INPV-11 & Kiểm thử Code Injection & Đạt. Không phát hiện lỗ hổng Code Injection. \\ \hline
 
-WSTG-INPV-12 & Kiểm thử File Inclusion & Đạt \\ \hline
+WSTG-INPV-12 & Kiểm thử File Inclusion & Đạt. Không phát hiện lỗ hổng File Inclusion. \\ \hline
 
-WSTG-INPV-13 & Kiểm thử Format String Injection & Đạt \\ \hline
+WSTG-INPV-13 & Kiểm thử Format String Injection & Đạt. Không phát hiện lỗ hổng Format String Injection. \\ \hline
 
-WSTG-INPV-14 & Kiểm thử lỗ hổng ẩn & Đạt \\ \hline
+WSTG-INPV-14 & Kiểm thử lỗ hổng ẩn & Đạt. Không phát hiện lỗ hổng ẩn. \\ \hline
 
 WSTG-INPV-15 & Kiểm thử HTTP Splitting / Smuggling & Không đạt. Ứng dụng có tồn tại lỗ hỗng HTTP Smuggling có thể lấy được request của người khác bao gồm cả phiên đăng nhập  \\ \hline
 
-WSTG-INPV-16 & Kiểm thử xử lý yêu cầu HTTP đến & Đạt \\ \hline
+WSTG-INPV-16 & Kiểm thử xử lý yêu cầu HTTP đến & Đạt. Hệ thống không phát sinh các HTTP request không cần thiết hoặc đáng ngờ. \\ \hline
 
-WSTG-INPV-17 & Kiểm thử Host Header Injection & Đạt \\ \hline
+WSTG-INPV-17 & Kiểm thử Host Header Injection & Đạt. Không phát hiện lỗ hổng Host Header Injection. \\ \hline
 
-WSTG-INPV-18 & Kiểm thử Server-side Template Injection & Đạt \\ \hline
+WSTG-INPV-18 & Kiểm thử Server-side Template Injection & Đạt. Không phát hiện lỗ hổng Server-side Template Injection. \\ \hline
 
-WSTG-INPV-19 & Kiểm thử Server-Side Request Forgery & Đạt \\ \hline
+WSTG-INPV-19 & Kiểm thử Server-Side Request Forgery & Đạt. Không phát hiện lỗ hổng Server-Side Request Forgery. \\ \hline
 
-WSTG-INPV-20 & Kiểm thử Mass Assignment & Đạt \\ \hline
+WSTG-INPV-20 & Kiểm thử Mass Assignment & Đạt. Không thể chỉnh sửa các trường dữ liệu ngoài phạm vi cho phép. \\ \hline
 
 \end{longtable}
 
@@ -683,7 +683,7 @@ thu thập thông tin phục vụ cho các bước tấn công tiếp theo.
 Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng hạng mục thuộc nhóm WSTG-ERRH, qua đó phản ánh mức độ an toàn của cơ chế 
 xử lý lỗi hiện tại cũng như khả năng kiểm soát thông tin được trả về cho người dùng khi xảy ra lỗi.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{7cm}|>{\centering\arraybackslash}p{3.5cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{3cm}|>{\centering\arraybackslash}p{7.5cm}|}
 \caption{Kết quả kiểm thử xử lý lỗi}\\
 \hline
 \textbf{ID} & \textbf{Nội dung} & \textbf{Kết luận} \\
@@ -695,9 +695,9 @@ xử lý lỗi hiện tại cũng như khả năng kiểm soát thông tin đư�
 \hline
 \endhead
 
-WSTG-ERRH-01 & Kiểm thử xử lý lỗi không đúng cách & Đạt. \\ \hline
+WSTG-ERRH-01 & Kiểm thử xử lý lỗi không đúng cách & Đạt. Không ghi nhận thông báo lỗi chi tiết hoặc rò rỉ thông tin nội bộ; các phản hồi lỗi được xử lý thống nhất và không để lộ dữ liệu nhạy cảm. \\ \hline
 
-WSTG-ERRH-02 & Kiểm thử việc lộ Stack trace & Đạt. \\ \hline
+WSTG-ERRH-02 & Kiểm thử việc lộ Stack trace & Nội dung này đã được hợp nhất vào mục WSTG-ERRH-01 Kiểm thử xử lý lỗi không đúng cách \\ \hline
 
 \end{longtable}
 
@@ -713,7 +713,7 @@ Bảng dưới đây trình bày tổng hợp kết quả kiểm thử đối v�
 phản ánh mức độ tuân thủ các yêu cầu bảo mật về mật mã của hệ thống, đồng thời chỉ ra các trường hợp 
 chưa đạt do tồn tại các cấu hình hoặc cơ chế mã hóa yếu cần được xem xét và khắc phục.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{7cm}|>{\centering\arraybackslash}p{3.5cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{4cm}|>{\centering\arraybackslash}p{6.5cm}|}
 \caption{Kết quả kiểm thử mật mã yếu}\\
 \hline
 \textbf{ID} & \textbf{Nội dung} & \textbf{Kết luận} \\
@@ -725,11 +725,11 @@ chưa đạt do tồn tại các cấu hình hoặc cơ chế mã hóa yếu c�
 \hline
 \endhead
 
-WSTG-CRYP-01 & Kiểm thử bảo mật lớp truyền tải yếu & Đạt. \\ \hline
+WSTG-CRYP-01 & Kiểm thử bảo mật lớp truyền tải yếu & Không đạt. Giao thức TLS 1.2 sử dụng các bộ mã hóa yếu. \\ \hline
 
-WSTG-CRYP-02 & Kiểm thử lỗ hổng Padding Oracle & Đạt. \\ \hline
+WSTG-CRYP-02 & Kiểm thử lỗ hổng Padding Oracle & Đạt. Không phát hiện lỗ hổng Padding Oracle trong quá trình kiểm thử. \\ \hline
 
-WSTG-CRYP-03 & Kiểm thử thông tin nhạy cảm được gửi qua kênh không được mã hóa & Đạt. \\ \hline
+WSTG-CRYP-03 & Kiểm thử thông tin nhạy cảm được gửi qua kênh không được mã hóa & Đạt. Các kênh truyền đảm bảo mức độ riêng tư và an toàn \\ \hline
 
 WSTG-CRYP-04 & Kiểm thử mã hóa yếu & Không đạt. Giao thức TLS 1.2 sử dụng các bộ mã hóa yếu. \\ \hline
 
@@ -748,7 +748,7 @@ Bảng dưới đây tổng hợp kết quả kiểm thử đối với từng h
 các chức năng phía client đã đáp ứng yêu cầu an toàn bảo mật, các trường hợp chưa đạt hoặc còn tồn 
 tại rủi ro, cũng như những hạng mục chưa thể đánh giá đầy đủ do giới hạn của mô hình kiểm thử hộp đen.
 
-\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{7cm}|>{\centering\arraybackslash}p{3.5cm}|}
+\begin{longtable}{|>{\centering\arraybackslash}p{3.5cm}|>{\centering\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}p{6cm}|}
 \caption{Kết quả kiểm thử phía máy người dùng}\\
 \hline
 \textbf{ID} & \textbf{Nội dung} & \textbf{Kết luận} \\
@@ -760,23 +760,23 @@ tại rủi ro, cũng như những hạng mục chưa thể đánh giá đầy �
 \hline
 \endhead
 
-WSTG-CLNT-01 & Kiểm thử lỗ hổng Cross-Site Scripting dựa trên DOM (DOM-Based XSS) & Đạt. \\ \hline
+WSTG-CLNT-01 & Kiểm thử lỗ hổng Cross-Site Scripting dựa trên DOM (DOM-Based XSS) & Đạt. Không phát hiện lỗ hổng DOM-Based XSS. \\ \hline
 
 WSTG-CLNT-02 & Kiểm thử khả năng thực thi mã JavaScript phía trình duyệt & Không đạt. Chức năng “Tạo sự kiện mới”, “Chỉnh sửa hồ sơ cá nhân” có lưu trữ và hiển thị lại dữ liệu phía client. \\ \hline
 
-WSTG-CLNT-03 & Kiểm thử lỗ hổng chèn mã HTML (HTML Injection) & Đạt. \\ \hline
+WSTG-CLNT-03 & Kiểm thử lỗ hổng chèn mã HTML & Đạt. Không phát hiện lỗ hổng chèn mã HTML. \\ \hline
 
-WSTG-CLNT-04 & Kiểm thử lỗ hổng chuyển hướng URL phía client & Đạt. \\ \hline
+WSTG-CLNT-04 & Kiểm thử lỗ hổng chuyển hướng URL phía client & Đạt. Không phát hiện lỗ hổng chuyển hướng URL phía client. \\ \hline
 
-WSTG-CLNT-05 & Kiểm thử lỗ hổng chèn mã CSS (CSS Injection) & Đạt. \\ \hline
+WSTG-CLNT-05 & Kiểm thử lỗ hổng chèn mã CSS & Đạt. Không phát hiện lỗ hổng chèn mã CSS. \\ \hline
 
-WSTG-CLNT-06 & Kiểm thử thao túng tài nguyên phía client & Đạt. \\ \hline
+WSTG-CLNT-06 & Kiểm thử thao túng tài nguyên phía client & Đạt. Không phát hiện lỗ hổng thao túng tài nguyên phía client. \\ \hline
 
-WSTG-CLNT-07 & Kiểm thử chia sẻ tài nguyên chéo nguồn (Cross-Origin Resource Sharing - CORS) &  \\ \hline
+WSTG-CLNT-07 & Kiểm thử chia sẻ tài nguyên chéo nguồn (Cross-Origin Resource Sharing - CORS) & Đạt. Cấu hình CORS không phát hiện rủi ro bảo mật trong quá trình kiểm thử. \\ \hline
 
-WSTG-CLNT-09 & Kiểm thử lỗ hổng Clickjacking & Đạt. \\ \hline
+WSTG-CLNT-09 & Kiểm thử lỗ hổng Clickjacking & Đạt. Cơ chế X-Frame-Options: SAMEORIGIN được cấu hình đúng và không phát hiện lỗ hổng clickjacking. \\ \hline
 
-WSTG-CLNT-12 & Kiểm thử lưu trữ dữ liệu trên trình duyệt (Browser Storage) &
+WSTG-CLNT-12 & Kiểm thử lưu trữ dữ liệu trên trình duyệt &
 Đạt. Không phát hiện thông tin nhạy cảm được lưu trữ trong bộ nhớ trình duyệt của người dùng. \\ \hline
 
 WSTG-CLNT-13 & Kiểm thử Cross-Site Script Inclusion (XSSI) &

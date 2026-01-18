@@ -5,7 +5,7 @@
 
 \begin{document}
 
-Trong mục này, nội dung sẽ trình bày mục đích của từng nội dung kiểm thử thuộc 11 nhóm trong quy trình kiểm thử xâm nhập chủ động.
+Trong mục này, nội dung sẽ trình bày mục đích của từng nội dung kiểm thử thuộc 10 nhóm trong quy trình kiểm thử xâm nhập chủ động.
 
 \subsection*{a) Thu thập thông tin}
 \begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
@@ -643,37 +643,6 @@ Xác định các dữ liệu nhạy cảm tồn tại trong hệ thống và đ
 WSTG-CLNT-14 &
 Kiểm thử Reverse Tabnabbing &
 Đánh giá khả năng ứng dụng bị tấn công reverse tabnabbing thông qua các liên kết mở tab mới không được kiểm soát.
-\\ \hline
-
-\end{longtable}
-
-\subsection*{k) Kiểm thử API}
-\begin{longtable}{|>{\centering\arraybackslash}p{1.3cm}|p{4.5cm}|p{7.7cm}|}
-
-\caption{Mục đích của nội dung kiểm thử API}\\
-\hline
-\textbf{Mã} & \textbf{Nội dung kiểm thử} & \textbf{Mục tiêu} \\
-\hline
-\endfirsthead
-
-\hline
-\textbf{Mã} & \textbf{Nội dung kiểm thử} & \textbf{Mục tiêu} \\
-\hline
-\endhead
-
-WSTG-APIT-01 &
-Thu thập thông tin API &
-Xác định toàn bộ các API endpoint được backend hỗ trợ, bao gồm cả các endpoint đã được tài liệu hóa và chưa được tài liệu hóa. Đồng thời xác định tất cả các tham số của từng endpoint mà backend xử lý và khám phá các dữ liệu liên quan đến API được nhúng trong HTML hoặc mã JavaScript gửi tới phía client.
-\\ \hline
-
-WSTG-APIT-02 &
-Kiểm thử kiểm soát truy cập theo đối tượng trong API &
-Đánh giá việc API có thực thi đầy đủ cơ chế phân quyền ở mức đối tượng hay không, nhằm đảm bảo rằng người dùng chỉ có thể truy cập và thao tác trên các đối tượng mà họ được phép tương tác.
-\\ \hline
-
-WSTG-APIT-99 &
-Kiểm thử GraphQL &
-Đánh giá việc triển khai GraphQL có được cấu hình an toàn và sẵn sàng cho môi trường sản xuất hay không, đồng thời xác thực tất cả các trường dữ liệu đầu vào trước các hình thức tấn công phổ biến và đảm bảo các cơ chế kiểm soát truy cập được áp dụng đầy đủ.
 \\ \hline
 
 \end{longtable}
